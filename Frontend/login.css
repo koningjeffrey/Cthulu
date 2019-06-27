@@ -4,7 +4,12 @@ body {
     font-family: sans-serif;
     background: url(maxresdefault.jpg);
     background-size: cover;
+    background-position: center center;
+    min-height: 100%;
     background-repeat: no-repeat;
+}
+html {
+    height: 100%;
 }
 
 .box {
