@@ -4,7 +4,12 @@ body {
     font-family: sans-serif;
     background: url(maxresdefault.jpg);
     background-size: cover;
+    background-position: center center;
+    min-height: 100%;
     background-repeat: no-repeat;
+}
+html {
+    height: 100%;
 }
 
 .box {
@@ -75,12 +80,12 @@ body {
     border-radius: 5px;
 }
 
-.register {
+.regfor {
     float: right;
-    margin-top: 8px;
     color: #ff60ff;
 }
 
 a:link {
     color: #ff60ff;
+    text-decoration: none;
   }
