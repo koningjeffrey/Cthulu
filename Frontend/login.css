@@ -80,12 +80,12 @@ html {
     border-radius: 5px;
 }
 
-.register {
+.regfor {
     float: right;
-    margin-top: 8px;
     color: #ff60ff;
 }
 
 a:link {
     color: #ff60ff;
+    text-decoration: none;
   }
