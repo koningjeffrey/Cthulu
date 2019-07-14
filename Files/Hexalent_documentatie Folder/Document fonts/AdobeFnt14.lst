@@ -1,0 +1,63 @@
+%!Adobe-FontList 1.14
+%Locale:0x413
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:BodoniMT
+FamilyName:Bodoni MT
+StyleName:Regular
+FullName:Bodoni MT
+MenuName:Bodoni MT
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\cartm\Documents\GitHub\Cthulu\Files\Hexalent_documentatie Folder\Document fonts\BOD_R.TTF
+DataFormat:sfntData
+FileLength:77884
+FileModTime:1556189611
+WeightClass:400
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:BlackadderITC-Regular
+FamilyName:Blackadder ITC
+StyleName:Regular
+FullName:Blackadder ITC
+MenuName:Blackadder ITC
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\cartm\Documents\GitHub\Cthulu\Files\Hexalent_documentatie Folder\Document fonts\ITCBLKAD.TTF
+DataFormat:sfntData
+FileLength:132372
+FileModTime:1556189639
+WeightClass:400
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+FullName:Minion Pro
+MenuName:Minion Pro
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\cartm\Documents\GitHub\Cthulu\Files\Hexalent_documentatie Folder\Document fonts\MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:217280
+FileModTime:1329303226
+WeightClass:400
+WidthClass:5
+AngleClass:0
+DesignSize:110
+%EndFont
+
