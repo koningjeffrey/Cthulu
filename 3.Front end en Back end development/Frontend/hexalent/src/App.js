@@ -7,6 +7,7 @@ import Register from './components/Register'
 import Producer from './components/Producer'
 import Promo from './components/Promo'
 import Admin from './components/Admin'
+import Notifications from './components/Notifications'
 
 import axios from 'axios';
 
@@ -113,6 +114,7 @@ class App extends React.Component{
             <Route exact path="/Producer" component={Producer}/>
             <Route exact path="/Promo" component={Promo}/>
             <Route exact path="/Admin" component={Admin}/>
+			<Route exact path="/Notifications" component={Notifications}/>
         </div>
       </Switch>
     </Router>

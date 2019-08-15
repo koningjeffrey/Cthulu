@@ -22,6 +22,10 @@ h2{
   text-align: center;
 }
 
+p {
+  color: #fff;
+}
+
 /*--------------------Nav--------------------*/
 .Nav{
   right: auto;
@@ -127,9 +131,8 @@ input[type="submit"] {
   grid-gap: 10px;
   max-width: 1200px;
   position: absolute;
-  top: 55%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%);
 }
 
 .griditem{
@@ -170,25 +173,7 @@ h2 {
   font-size: 2rem;
 }
 
-/*sample player placement*/
-.player {
-  background-color: antiquewhite;
-  width: 100%;
-  height: 50px;
-}
 
-/*Sample comment placement*/
-.comments{
-  background-color: red;
-  width: 100%;
-  height: 50px;
-  }
-
-/*sample list*/
-iframe{
-  width: 100%;
-  height: 100px;
-}
 
 /*click buttom file upload*/
 .ubtn{
@@ -287,9 +272,8 @@ iframe{
   position: absolute;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 25px;
-  top: 55%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%);
 }
 
 #item1{
@@ -347,10 +331,11 @@ h2 {
     padding: 10px;
     border: 1px solid #999;
     border-radius: 10px;
-    margin-bottom: 5px;
+    margin-top: 5px;
   }
 
   textarea{
+    box-sizing: border-box;
     width: 100%;
     background: black;
     color: #fff;
@@ -358,6 +343,14 @@ h2 {
     border: 1px solid #999;
     border-radius: 10px;
     margin-bottom: 5px;
+  }
+
+  /*--------------------Rating-----------------*/
+
+  .sendRate{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   /*-----------------Admin--------------------*/
 
@@ -375,4 +368,23 @@ h2 {
 .UserButton{
   position: relative;
   margin-right: 5px;
+}
+
+/*--------------------Notifications--------------------*/
+
+.Notification{
+  width: 400px;
+  width: 600px;
+  height: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, .8);
+  box-sizing: border-box;
+  border: var(--pink) solid 2px;
+  box-shadow: 0 15px 25px rgba(0,0,0.5);
+  border-radius: 10px;
+}
+
+.FlexMiddle{
+  display: flex;
+  justify-content: center;
 }

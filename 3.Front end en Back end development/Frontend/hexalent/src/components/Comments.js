@@ -9,9 +9,23 @@ class Comments extends React.Component {
                         <textarea>
                           Whats up?
                         </textarea>
-                        <input class="UserButton" type="submit" name="Send" value="Send"/>
+                        <div className="sendRate">
+                        <input className="UserButton" type="submit" name="Send" value="Send"/>
+                        <p>Rating:</p>
+                        <img src="Dislike.png" alt="Dislike"/>
+                        <img src="Like.png" alt="Like"/>
+                        </div>
                         <Comment/>
-                        
+                        <Comment/>
+                        <Comment/>
+                        <Comment/>
+                        <Comment/>
+                        <Comment/>
+                        <Comment/>
+                        <Comment/>
+                        <Comment/>
+                        <Comment/>
+                        <Comment/>
                     </div>;
     }
   }
