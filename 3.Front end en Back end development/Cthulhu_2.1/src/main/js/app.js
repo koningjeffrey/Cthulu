@@ -1,37 +1,31 @@
 import axios from 'axios';
 import React from 'react';
 import ReactDOM from'react-dom';
-import { BrowserRouter as Router, Route, Link, Switch, NavLink, Prompt} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Login from './components/Login';
 import Register from './components/Register';
-import Producer from'./components/Producer';
+import Producer from './components/Producer';
+import Promo from './components/Promo';
+import Admin from './components/Admin';
 
 class App extends React.Component {
 
 	constructor(props) {
             super(props);
                 this.state = {  files: [], comments: [], currentFile: {}, currentUser:  {}, 
-                                currentUserId: null, currentFileId: null, message: ""};
+                                currentUserId: 0, currentFileId: 0, message: ""};
                             
                 this.loginUser = this.loginUser.bind(this);
-                this.getUploads = this.getUploads.bind(this);
-                this.currentUser = React.createRef();
-                this.currentUserId = React.createRef();
-                this.lUsername = React.createRef();
+                this.logoutUser = this.logoutUser.bind(this);
 	}
         loginUser(currentUser)   {
             this.setState({currentUser: currentUser, currentUserId:currentUser.userId});
-            this.getUploads();
         }
-        getUploads() {
-	  axios.get(`/api/files/` + this.state.currentUserId)
-            .then(res => {
-                const files = res.data;
-                console.log(files);
-                this.setState({ files: files });
-        });
-	}
+        logoutUser()    {
+            this.setState({files: [], comments: [], currentFile: {}, currentUser:  {}, 
+                                currentUserId: 0, currentFileId: 0, message: ""});
+        }
 
 	render() {
 		return (
@@ -43,9 +37,13 @@ class App extends React.Component {
                             <Route exact path="/" 
                                          render={(props) => <Login {...props} currentUser={this.state.currentUser} loginUser={this.loginUser} /> }  />
                             <Route exact path="/Register" 
-                                         render={(props) => <Register {...props} /> }  />
-                             <Route exact path="/Producer"
-                                         render={(props) => <Producer {...props}  /> }  />
+                                         render={(props) => <Register {...props} currentUser={this.state.currentUser} /> }  />
+                            <Route exact path="/Producer"
+                                         render={(props) => <Producer {...props} currentUser={this.state.currentUser} /> }  />
+                            <Route exact path="/Promo"
+                                         render={(props) => <Promo {...props} currentUser={this.state.currentUser} /> } />
+                            <Route exact path="Admin"
+                                         render={(props) => <Admin {...props} currentUser={this.state.currentUser} /> } />
                         </div>
                       </Switch>
                     </Router>

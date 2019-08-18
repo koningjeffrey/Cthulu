@@ -1,23 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, NavLink, Prompt} from 'react-router-dom';
+import { BrowserRouter as Link} from 'react-router-dom';
 import { history } from 'react-router-dom';
 import axios from 'axios';
-import {Redirect} from'react-router-dom';
 
 class Login extends React.Component {
     
     constructor(props) {
-            super(props);
-                this.state = {  currentUser:  null, currentUserId: 0,
-                                currentUserRole: 0 };
-                            
-                this.saveLocalStorage = this.saveLocalStorage.bind(this);
-                this.loadLocalStorage = this.loadLocalStorage.bind(this);
-                
-                this.loginUser = this.loginUser.bind(this);
-                
-                this.lEmail = React.createRef();
-                this.lPassword = React.createRef();
+        super(props);
+            this.state = {  currentUser:  null, currentUserId: 0,
+                            currentUserRole: 0 };
+
+            this.saveLocalStorage = this.saveLocalStorage.bind(this);
+            this.loadLocalStorage = this.loadLocalStorage.bind(this);
+
+            this.loginUser = this.loginUser.bind(this);
+
+            this.lEmail = React.createRef();
+            this.lPassword = React.createRef();
 	}
         
         componentDidMount() {
@@ -43,8 +42,11 @@ class Login extends React.Component {
                         this.setState({currentUser: user, currentUserRole: user.userRole, currentUserId: user.userId});
                         this.saveLocalStorage();
                         this.props.loginUser(this.state.currentUser);
-                        if(user !== "")  {this.props.history.push('/Producer');}
-                        else {return null;};
+                        if(user !== "")  {
+                            if(user.userRole === 0) {this.props.history.push('/Producer');}
+                            if(user.userRole === 1) {this.props.history.push('/Promo');}
+                            if(user.userRole === 2) {this.props.history.push('/Admin');}
+                        } else {return null;}
             });            
         }
     
