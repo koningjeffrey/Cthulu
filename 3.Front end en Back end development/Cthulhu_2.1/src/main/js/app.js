@@ -37,7 +37,7 @@ class App extends React.Component {
                             <Route exact path="/" 
                                          render={(props) => <Login {...props} currentUser={this.state.currentUser} loginUser={this.loginUser} /> }  />
                             <Route exact path="/Register" 
-                                         render={(props) => <Register {...props} currentUser={this.state.currentUser} /> }  />
+                                         render={(props) => <Register {...props} currentUser={this.state.currentUser} loginUser={this.loginUser}/> }  />
                             <Route exact path="/Producer"
                                          render={(props) => <Producer {...props} currentUser={this.state.currentUser} /> }  />
                             <Route exact path="/Promo"

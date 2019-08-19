@@ -9,21 +9,21 @@ class PlayList extends React.Component {
         this.state = { currentFile: {} };
         this.setCurrentFile = this.setCurrentFile.bind(this);
     }
-    setCurrentFile()  {
-        console.log(this.props.id);
-            axios.get('/api/file/' + this.props.id)
-                .then(response =>   {
-                    const file = response.data;
-                    this.setState({currentFile: file});
-            });
+    setCurrentFile(file)  {
+        console.log(file.fileId);
     }
     
     render() {
       return (
                 <div className="griditem">
                     <h2>2. PlayList</h2>
-                    {this.props.files.map(file => 
-                    <Player currentUser={this.props.currentUser} id={file.fileId} key={file.fileId} name={file.filename} onClick={this.setCurrentFile}/>)}
+                    {this.props.files.map(file =>
+                    <div onClick={this.setCurrentFile(file)} key={file.fileId} value={file.fileId}>
+                    <Player currentUser={this.props.currentUser} 
+                            id={file.fileId} 
+                            key={file.fileId} 
+                            name={file.filename} />
+                    </div>)}
                 </div>
       );
     }

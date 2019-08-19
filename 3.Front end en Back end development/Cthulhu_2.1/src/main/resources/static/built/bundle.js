@@ -36840,7 +36840,8 @@ function (_React$Component) {
         path: "/Register",
         render: function render(props) {
           return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Register__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, props, {
-            currentUser: _this2.state.currentUser
+            currentUser: _this2.state.currentUser,
+            loginUser: _this2.loginUser
           }));
         }
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -37213,7 +37214,7 @@ function (_React$Component) {
         value: "Login User"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "regfor"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/Register"
       }, "Register account"))));
     }
@@ -37308,7 +37309,7 @@ function (_React$Component) {
         src: "Hexalent_logo_white.png",
         alt: "Logo"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_browser_router__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/",
+        to: "/Login",
         onClick: this.logoutUser
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Logout"))));
     }
@@ -37378,33 +37379,27 @@ function (_React$Component) {
 
   _createClass(PlayList, [{
     key: "setCurrentFile",
-    value: function setCurrentFile() {
-      var _this2 = this;
-
-      console.log(this.props.id);
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/file/' + this.props.id).then(function (response) {
-        var file = response.data;
-
-        _this2.setState({
-          currentFile: file
-        });
-      });
+    value: function setCurrentFile(file) {
+      console.log(file.fileId);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "griditem"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "2. PlayList"), this.props.files.map(function (file) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Player__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          currentUser: _this3.props.currentUser,
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          onClick: _this2.setCurrentFile(file),
+          key: file.fileId,
+          value: file.fileId
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Player__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          currentUser: _this2.props.currentUser,
           id: file.fileId,
           key: file.fileId,
-          name: file.filename,
-          onClick: _this3.setCurrentFile
-        });
+          name: file.filename
+        }));
       }));
     }
   }]);
@@ -37773,6 +37768,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Register).call(this, props));
     _this.state = {};
     _this.addUser = _this.addUser.bind(_assertThisInitialized(_this));
+    _this.loginUser = _this.loginUser.bind(_assertThisInitialized(_this));
+    _this.saveLocalStorage = _this.saveLocalStorage.bind(_assertThisInitialized(_this));
     _this.rFirstName = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.rLastName = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     _this.rEmail = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
@@ -37782,6 +37779,12 @@ function (_React$Component) {
   }
 
   _createClass(Register, [{
+    key: "saveLocalStorage",
+    value: function saveLocalStorage() {
+      localStorage.setItem('email', this.rEmail.current.value);
+      localStorage.setItem('password', this.rPassword.current.value);
+    }
+  }, {
     key: "addUser",
     value: function addUser(e) {
       var _this2 = this;
@@ -37796,9 +37799,45 @@ function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user", data).then(function (result) {
         var createdUser = result.data;
 
-        _this2.setState({
-          message: "User Created!"
+        _this2.loginUser();
+      });
+    }
+  }, {
+    key: "loginUser",
+    value: function loginUser() {
+      var _this3 = this;
+
+      var data = new FormData();
+      data.append("email", this.rEmail.current.value);
+      data.append("password", this.rPassword.current.value);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/login", data).then(function (result) {
+        var user = result.data;
+
+        _this3.setState({
+          currentUser: user,
+          currentUserRole: user.userRole,
+          currentUserId: user.userId
         });
+
+        _this3.saveLocalStorage();
+
+        _this3.props.loginUser(_this3.state.currentUser);
+
+        if (user !== "") {
+          if (user.userRole === 0) {
+            _this3.props.history.push('/Producer');
+          }
+
+          if (user.userRole === 1) {
+            _this3.props.history.push('/Promo');
+          }
+
+          if (user.userRole === 2) {
+            _this3.props.history.push('/Admin');
+          }
+        } else {
+          return null;
+        }
       });
     }
   }, {
