@@ -8,12 +8,19 @@ class Register extends React.Component {
             this.state = {};
 
     this.addUser = this.addUser.bind(this);
+    this.loginUser = this.loginUser.bind(this);
+    this.saveLocalStorage = this.saveLocalStorage.bind(this);
     
     this.rFirstName = React.createRef();
     this.rLastName = React.createRef();
     this.rEmail = React.createRef();
     this.rPassword = React.createRef();
     this.rCountry = React.createRef();
+    }
+
+    saveLocalStorage() {
+        localStorage.setItem('email', this.rEmail.current.value);
+        localStorage.setItem('password', this.rPassword.current.value);
     }
 
     addUser(e)  {
@@ -28,8 +35,26 @@ class Register extends React.Component {
         axios.post(`/api/user`, data)
             .then(result => {
                 const createdUser = result.data;
-                this.setState({message: "User Created!"});
+                this.loginUser();
         });    
+    }
+    loginUser()   {
+            const data = new FormData();
+                data.append("email", this.rEmail.current.value);
+                data.append("password", this.rPassword.current.value);
+                
+            axios.post(`/api/login`, data)
+                    .then(result => {
+                        const user = result.data;
+                        this.setState({currentUser: user, currentUserRole: user.userRole, currentUserId: user.userId});
+                        this.saveLocalStorage();
+                        this.props.loginUser(this.state.currentUser);
+                        if(user !== "")  {
+                            if(user.userRole === 0) {this.props.history.push('/Producer');}
+                            if(user.userRole === 1) {this.props.history.push('/Promo');}
+                            if(user.userRole === 2) {this.props.history.push('/Admin');}
+                        } else {return null;}
+            });            
     }
 
     render() {

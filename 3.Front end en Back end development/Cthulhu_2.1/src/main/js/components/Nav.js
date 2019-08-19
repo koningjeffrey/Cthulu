@@ -29,7 +29,7 @@ class Nav extends React.Component {
             <h1>Dashboard</h1>
             <img src="Hexalent_logo_white.png" alt="Logo"/>
             <div>
-                <Link to="/" onClick={this.logoutUser}><p>Logout</p></Link>
+                <Link to="/Login" onClick={this.logoutUser}><p>Logout</p></Link>
             </div>
         </div>
         );
