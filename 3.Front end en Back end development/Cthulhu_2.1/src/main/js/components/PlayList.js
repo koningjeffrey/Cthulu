@@ -6,24 +6,29 @@ class PlayList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { currentFile: {} };
-        this.setCurrentFile = this.setCurrentFile.bind(this);
+        this.state = { currentFileId: 0 };
+        this.setCurrentFileId = this.setCurrentFileId.bind(this);
     }
-    setCurrentFile(file)  {
-        console.log(file.fileId);
+    setCurrentFileId(currentFileId)  {
+        console.log(currentFileId);
+        this.setState({currentFileId: currentFileId});
+        this.props.setCurrentFileId(this.state.currentFileId);
     }
     
     render() {
       return (
                 <div className="griditem">
                     <h2>2. PlayList</h2>
+                    
                     {this.props.files.map(file =>
-                    <div onClick={this.setCurrentFile(file)} key={file.fileId} value={file.fileId}>
-                    <Player currentUser={this.props.currentUser} 
-                            id={file.fileId} 
+                    
+                    <Player currentUser={this.props.currentUser}
+                            setCurrentFileId={this.setCurrentFileId}
+                            file={file}
                             key={file.fileId} 
-                            name={file.filename} />
-                    </div>)}
+                            value={file.fileId}/>              
+                    )}
+            
                 </div>
       );
     }

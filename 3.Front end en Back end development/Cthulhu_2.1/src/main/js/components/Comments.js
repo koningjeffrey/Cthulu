@@ -1,8 +1,22 @@
 import React from 'react';
+import axios from 'axios';
 
 import Comment from './Comment'
 
 class Comments extends React.Component {
+    
+    constructor(props) {
+    super(props);
+    }
+    
+    getComments()   {
+        axios.get('/api/comments/' + this.props.currentFileId)
+            .then(response =>   {
+                const comments = response.data;
+                this.setState({comments: comments});
+        });
+    }
+    
     render() {
       return  (      
             <div className="griditem">

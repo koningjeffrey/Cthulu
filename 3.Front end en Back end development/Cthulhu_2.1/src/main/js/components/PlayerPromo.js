@@ -1,4 +1,5 @@
 import React from 'react';
+import Player from './Player'
 
 class PlayerPromo extends React.Component {
     render() {

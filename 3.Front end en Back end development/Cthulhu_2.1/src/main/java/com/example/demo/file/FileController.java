@@ -3,6 +3,7 @@ package com.example.demo.file;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Sort;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,14 @@ public class FileController {
     
     @GetMapping("/api/files/{currentUserId}")
     public List<File> getFilesByUserId(@PathVariable("currentUserId") Integer userId) {
-        List <File> files = fileRepository.findByUserId(userId);
+        List <File> files = fileRepository.findByUserId(userId, Sort.by("timestamp").ascending());
+        
+        return files;
+    }
+    @GetMapping("/api/files/all")
+    public List<File> getAllFiles() {
+        
+        List<File> files = fileRepository.findAll(Sort.by("timestamp").ascending());
         
         return files;
     }
