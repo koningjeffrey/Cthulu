@@ -42,6 +42,19 @@ p {
   height: 60px;
 }
 
+/*--------------------Footer--------------------*/
+.Footer{
+  right: auto;
+  bottom: 5px;
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  margin-left: 50%;
+  margin-right: auto;
+  transform: translate(-50%)
+}
+
 /*--------------------Box--------------------*/
 .box {
   position: absolute;

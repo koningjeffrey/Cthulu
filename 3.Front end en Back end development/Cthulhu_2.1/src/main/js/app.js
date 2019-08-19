@@ -8,6 +8,9 @@ import Register from './components/Register';
 import Producer from './components/Producer';
 import Promo from './components/Promo';
 import Admin from './components/Admin';
+import Chat from './components/Chat'
+import Notifications from './components/Notifications'
+
 
 class App extends React.Component {
 
@@ -44,6 +47,11 @@ class App extends React.Component {
                                          render={(props) => <Promo {...props} currentUser={this.state.currentUser} /> } />
                             <Route exact path="Admin"
                                          render={(props) => <Admin {...props} currentUser={this.state.currentUser} /> } />
+                            <Route exact path="Chat"
+                                         render={<Chat/> } />
+                            <Route exact path="Notifications"
+                                         render={<Notifications/> } />
+
                         </div>
                       </Switch>
                     </Router>
