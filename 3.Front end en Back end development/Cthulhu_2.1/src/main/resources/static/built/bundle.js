@@ -33195,8 +33195,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PlayerPromo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PlayerPromo */ "./src/main/js/components/PlayerPromo.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -33275,9 +33273,9 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Nav__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerPromo__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, this.props, {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerPromo__WEBPACK_IMPORTED_MODULE_4__["default"], {
         files: this.state.files
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Comments__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Comments__WEBPACK_IMPORTED_MODULE_3__["default"], {
         id: "item2"
       })));
     }
@@ -33384,8 +33382,7 @@ function (_React$Component) {
 
         _this3.setState({
           currentUser: user,
-          currentUserRole: user.userRole,
-          currentUserId: user.userId
+          currentUserRole: user.userRole
         });
 
         _this3.saveLocalStorage();
@@ -33467,6 +33464,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33477,13 +33476,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -33492,13 +33492,38 @@ var RegisterPromo =
 function (_React$Component) {
   _inherits(RegisterPromo, _React$Component);
 
-  function RegisterPromo() {
+  function RegisterPromo(props) {
+    var _this;
+
     _classCallCheck(this, RegisterPromo);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(RegisterPromo).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RegisterPromo).call(this, props));
+    _this.state = {};
+    _this.addUser = _this.addUser.bind(_assertThisInitialized(_this));
+    _this.rFirstName = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.rLastName = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.rEmail = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.rPassword = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    _this.rCountry = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
   }
 
   _createClass(RegisterPromo, [{
+    key: "addUser",
+    value: function addUser(e) {
+      e.preventDefault();
+      var data = new FormData();
+      data.append("email", this.rEmail.current.value);
+      data.append("firstName", this.rFirstName.current.value);
+      data.append("lastName", this.rLastName.current.value);
+      data.append("password", this.rPassword.current.value);
+      data.append("country", this.rCountry.current.value);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/userPromo", data).then(function (result) {
+        var createdUser = result.data;
+        console.log(createdUser);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -33680,6 +33705,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33690,9 +33717,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -33700,40 +33727,63 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var UserProcuder =
+
+var UserProducer =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(UserProcuder, _React$Component);
+  _inherits(UserProducer, _React$Component);
 
-  function UserProcuder() {
-    _classCallCheck(this, UserProcuder);
+  function UserProducer(props) {
+    var _this;
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(UserProcuder).apply(this, arguments));
+    _classCallCheck(this, UserProducer);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserProducer).call(this, props));
+    _this.blockProducer = _this.blockProducer.bind(_assertThisInitialized(_this));
+    _this.deleteProducer = _this.deleteProducer.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
-  _createClass(UserProcuder, [{
+  _createClass(UserProducer, [{
+    key: "blockProducer",
+    value: function blockProducer() {
+      console.log("W.I.P.");
+    }
+  }, {
+    key: "deleteProducer",
+    value: function deleteProducer() {
+      var data = new FormData();
+      data.append("userId", this.props.producer.userId);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user/delete", data).then(function (res) {
+        var deletedUser = res.data;
+        console.log("User succesfully deleted!" + deletedUser);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "UserBlock"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "UserName"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.producer.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         "class": "UserButton",
         type: "submit",
         name: "Block",
-        value: "Block"
+        value: "Block",
+        onClick: this.blockProducer
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         "class": "UserButton",
         type: "submit",
         name: "Remove",
-        value: "Remove"
+        value: "Remove",
+        onClick: this.deleteProducer
       }));
     }
   }]);
 
-  return UserProcuder;
+  return UserProducer;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (UserProcuder);
+/* harmony default export */ __webpack_exports__["default"] = (UserProducer);
 
 /***/ }),
 
@@ -33748,7 +33798,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _UserProducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserProducer */ "./src/main/js/components/UserProducer.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _UserProducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserProducer */ "./src/main/js/components/UserProducer.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33759,13 +33811,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -33775,18 +33828,48 @@ var UserProcuders =
 function (_React$Component) {
   _inherits(UserProcuders, _React$Component);
 
-  function UserProcuders() {
+  function UserProcuders(props) {
+    var _this;
+
     _classCallCheck(this, UserProcuders);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(UserProcuders).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserProcuders).call(this, props));
+    _this.state = {
+      producers: []
+    };
+    _this.getProducers = _this.getProducers.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(UserProcuders, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getProducers();
+    }
+  }, {
+    key: "getProducers",
+    value: function getProducers() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/producers").then(function (res) {
+        var producers = res.data;
+
+        _this2.setState({
+          producers: producers
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "griditem"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "1. Producers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProducer__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProducer__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProducer__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProducer__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "1. Producers"), this.state.producers.map(function (producer) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProducer__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: producer.userId,
+          producer: producer
+        });
+      })));
     }
   }]);
 
@@ -33808,6 +33891,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33818,13 +33903,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -33833,21 +33919,36 @@ var UserPromo =
 function (_React$Component) {
   _inherits(UserPromo, _React$Component);
 
-  function UserPromo() {
+  function UserPromo(props) {
+    var _this;
+
     _classCallCheck(this, UserPromo);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(UserPromo).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserPromo).call(this, props));
+    _this.deletePromoter = _this.deletePromoter.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(UserPromo, [{
+    key: "deletePromoter",
+    value: function deletePromoter() {
+      var data = new FormData();
+      data.append("userId", this.props.promoter.userId);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user/delete", data).then(function (res) {
+        var deletedUser = res.data;
+        console.log("User succesfully deleted!" + deletedUser);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "UserBlock"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "UserName"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.promoter.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         name: "Remove",
-        value: "Remove"
+        value: "Remove",
+        onClick: this.deletePromoter
       }));
     }
   }]);
@@ -33870,7 +33971,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _UserPromo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserPromo */ "./src/main/js/components/UserPromo.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _UserPromo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserPromo */ "./src/main/js/components/UserPromo.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33881,13 +33984,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -33897,18 +34001,48 @@ var UserPromoters =
 function (_React$Component) {
   _inherits(UserPromoters, _React$Component);
 
-  function UserPromoters() {
+  function UserPromoters(props) {
+    var _this;
+
     _classCallCheck(this, UserPromoters);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(UserPromoters).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserPromoters).call(this, props));
+    _this.state = {
+      promoters: []
+    };
+    _this.getPromoters = _this.getPromoters.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(UserPromoters, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getPromoters();
+    }
+  }, {
+    key: "getPromoters",
+    value: function getPromoters() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/promoters").then(function (res) {
+        var promoters = res.data;
+
+        _this2.setState({
+          promoters: promoters
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "griditem"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "2. Promoters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserPromo__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserPromo__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserPromo__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserPromo__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserPromo__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserPromo__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "2. Promoters"), this.state.promoters.map(function (promoter) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserPromo__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: promoter.userId,
+          promoter: promoter
+        });
+      })));
     }
   }]);
 

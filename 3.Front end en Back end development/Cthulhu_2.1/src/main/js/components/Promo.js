@@ -36,7 +36,7 @@ class Promo extends React.Component {
             <div>
                 <Nav/>
                 <div className="grid">
-                    <PlayerPromo {...this.props} files={this.state.files}/>
+                    <PlayerPromo files={this.state.files}/>
                     <Comments id="item2"/>
                 </div>
             </div>

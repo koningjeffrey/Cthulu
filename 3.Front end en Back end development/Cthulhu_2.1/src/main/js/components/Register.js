@@ -46,7 +46,7 @@ class Register extends React.Component {
             axios.post(`/api/login`, data)
                     .then(result => {
                         const user = result.data;
-                        this.setState({currentUser: user, currentUserRole: user.userRole, currentUserId: user.userId});
+                        this.setState({currentUser: user, currentUserRole: user.userRole});
                         this.saveLocalStorage();
                         this.props.loginUser(this.state.currentUser);
                         if(user !== "")  {

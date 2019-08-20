@@ -7,14 +7,16 @@ import UserPromoters from './UserPromoters'
 
 class Admin extends React.Component {
     render() {
-        return <div>
-        <Nav/>
-        <div className="grid">
-        <UserProducers/>
-        <UserPromoters/>
-        <RegisterPromo/>
-    </div>
-    </div>
+        return (
+            <div>
+            <Nav/>
+            <div className="grid">
+                <UserProducers/>
+                <UserPromoters/>
+                <RegisterPromo/>
+            </div>
+            </div>
+        );
     }
   }
 
