@@ -7,9 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface FileRepository extends CrudRepository<File, Integer>{
     
-    List<File> findByUserId(Integer userId, Sort sort);
-    
-    Optional<File> findByFileId(Integer fileId);
-    
-    List<File> findAll(Sort sort);
+    public List<File> findByUserId(Integer userId, Sort sort);
+    public Optional<File> findByFileId(Integer fileId);
+    public List<File> findAll(Sort sort);
 }
