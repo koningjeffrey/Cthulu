@@ -1,11 +1,42 @@
 import React from 'react';
 import axios from 'axios';
 
+const emailRegex = RegExp(
+    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  );
+  
+  const formValid = ({ formErrors, ...rest }) => {
+    let valid = true;
+  
+    // validate form errors being empty
+    Object.values(formErrors).forEach(val => {
+      val.length > 0 && (valid = false);
+    });
+  
+    // validate the form was filled out
+    Object.values(rest).forEach(val => {
+      val === null && (valid = false);
+    });
+  
+    return valid;
+  };
+
 class Register extends React.Component {
 
     constructor(props) {
         super(props);
-            this.state = {};
+            this.state = {
+                firstName: null,
+                lastName: null,
+                email: null,
+                password: null,
+                formErrors: {
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: ""
+            }
+            };
 
     this.addUser = this.addUser.bind(this);
     this.loginUser = this.loginUser.bind(this);
@@ -16,7 +47,54 @@ class Register extends React.Component {
     this.rEmail = React.createRef();
     this.rPassword = React.createRef();
     this.rCountry = React.createRef();
+    
     }
+
+    handleSubmit(e){
+        e.preventDefault();
+    
+        if (formValid(this.state)) {
+          console.log(`
+            --SUBMITTING--
+            First Name: ${this.state.firstName}
+            Last Name: ${this.state.lastName}
+            Email: ${this.state.email}
+            Password: ${this.state.password}
+          `);
+        } else {
+          console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+        }
+      };
+    
+      handleChange(e) {
+        e.preventDefault();
+        const { name, value } = e.target;
+        let formErrors = { ...this.state.formErrors };
+    
+        switch (name) {
+          case "firstName":
+            formErrors.firstName =
+              value.length < 3 ? "minimum 3 characaters required" : "";
+            break;
+          case "lastName":
+            formErrors.lastName =
+              value.length < 3 ? "minimum 3 characaters required" : "";
+            break;
+          case "email":
+            formErrors.email = emailRegex.test(value)
+              ? ""
+              : "invalid email address";
+            break;
+          case "password":
+            formErrors.password =
+              value.length < 6 ? "minimum 6 characaters required" : "";
+            break;
+          default:
+            break;
+        }
+    
+        this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+    };
 
     saveLocalStorage() {
         localStorage.setItem('email', this.rEmail.current.value);
@@ -58,29 +136,43 @@ class Register extends React.Component {
     }
 
     render() {
+        const { formErrors } = this.state;
+
       return  <div className="box">
       <h1>Register to become Hexalent</h1>
       <h2>in search of exellent talent.</h2>
       <form onSubmit={this.addUser}>
       <div className="inputBox">
-              <input type="text" ref={this.rEmail}/>
+              <input type="text" name="email" onChange={this.onChange} ref={this.rEmail}/>
               <label>E-mail</label>
+              {formErrors.email.length > 0 && (
+                <span className="errorMessage">{formErrors.email}</span>
+              )}
           </div>
           <div className="inputBox">
-              <input type="text" ref={this.rFirstName}/>
+              <input type="text" name="firstName" onChange={this.onChange} ref={this.rFirstName}/>
               <label>First name</label>
+              {formErrors.firstName.length > 0 && (
+                <span className="errorMessage">{formErrors.firstName}</span>
+              )}
           </div>
           <div className="inputBox">
-              <input type="text" ref={this.rLastName}/>
+              <input type="text" name="lastName" onChange={this.onChange} ref={this.rLastName}/>
               <label>Last name</label>
+              {formErrors.lastName.length > 0 && (
+                <span className="errorMessage">{formErrors.lastName}</span>
+              )}
           </div>
           <div className="inputBox">
-              <input type="text" ref={this.rCountry}/>
+              <input type="text" name="Country" onChange={this.onChange} ref={this.rCountry}/>
               <label>Country</label>
           </div>
           <div className="inputBox">
-              <input type="password" ref={this.rPassword}/>
+              <input type="password" name="password" onChange={this.onChange} ref={this.rPassword}/>
               <label>Password</label>
+              {formErrors.password.length > 0 && (
+                <span className="errorMessage">{formErrors.password}</span>
+              )}
           </div>
           <input type="submit" name="Submit" value="Submit"/>
       </form>

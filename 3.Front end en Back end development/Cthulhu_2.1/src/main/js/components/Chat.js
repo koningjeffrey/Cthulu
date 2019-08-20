@@ -5,24 +5,11 @@ import Notification from './Notification'
 
 class Chat extends React.Component {
     render() {
-      return <div>
-                <Nav/>
-                    <div className="FlexMiddle">
-                        <div className="Notification">
-                            <h1>Notifications</h1>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
-                        </div>
+      return <div className="DarkLayer">
+                <div className="FlexMiddle">
+                    <div className="Notification">
+                        <h1>Notifications</h1>
+                    </div>
                     </div>
                 </div>;
     }

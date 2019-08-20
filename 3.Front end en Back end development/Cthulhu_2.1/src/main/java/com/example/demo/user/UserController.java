@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+//import com.example.demo.util.RegexUtil;
+
 
 
 @RestController
@@ -59,10 +61,19 @@ public class UserController {
                             @RequestParam("lastName")   String lastName,
                             @RequestParam("password")   String password,
                             @RequestParam("country")    String country)  {
-        
-        User u = new User(email, firstName, lastName, password, country);
-        User createdUser = userRepository.save(u);
-        return createdUser;
+       /* if(RegexUtil.hasValidPattern(email, RegexUtil.EMAIL_PATTERN) && 
+            RegexUtil.hasValidPattern(firstName, RegexUtil.FIRSTNAME_PATTERN) &&
+            RegexUtil.hasValidPattern(lastName, RegexUtil.LASTNAME_PATTERN) &&
+            RegexUtil.hasValidPattern(password, RegexUtil.PASSWORD_PATTERN) &&
+            RegexUtil.hasValidPattern(country, RegexUtil.COUNTRY_PATTERN)){*/
+            if(email.contains("@") && email.contains(".") && !firstName.contains(">") && !firstName.contains(".") && !lastName.contains(">")){
+            User u = new User(email, firstName, lastName, password, country);
+            User createdUser = userRepository.save(u);
+    
+            return createdUser;
+            }else{
+                return null;
+            }
     }
     
     @PostMapping("/api/user/delete/")
