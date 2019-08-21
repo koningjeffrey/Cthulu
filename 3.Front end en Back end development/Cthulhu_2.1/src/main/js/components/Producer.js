@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {withRouter} from 'react-router-dom'
 
 import Nav from './Nav'
 import Upload from './Upload'
@@ -50,4 +51,4 @@ class Producer extends React.Component {
     }
   }
 
-export default Producer
+export default withRouter(Producer)

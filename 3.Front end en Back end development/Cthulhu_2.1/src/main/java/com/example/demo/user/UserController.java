@@ -1,3 +1,4 @@
+//userController wordt gebruikt om gegevens van en naar de database te sturen
 package com.example.demo.user;
 
 import com.example.demo.login.LoginAttempt;
@@ -21,11 +22,13 @@ public class UserController {
     private UserRepository userRepository;
     private LoginAttemptRepository loginAttemptRepository;
 
+    //Constructor
     public UserController(UserRepository userRepository, LoginAttemptRepository loginAttemptRepository)    {
         this.userRepository = userRepository;
         this.loginAttemptRepository = loginAttemptRepository;
     }
     
+    //Stuurt de login gegevens naar de database.
     @PostMapping("/api/login")
     public User loginUser(  @RequestParam("email")      String email,
                             @RequestParam("password")   String password)   {
@@ -57,6 +60,7 @@ public class UserController {
             } else {return null;} 
     }
     
+    //Maakt een user aan en checkt of hij aan de Regex voorwaarden voldoet.
     @PostMapping("/api/user")
     public User createUser( @RequestParam("email")      String email,
                             @RequestParam("firstName")  String firstName,
@@ -77,7 +81,7 @@ public class UserController {
                 return null;
             }
     }
-    
+    //RequestParm haalt de gegevens op van de frontend en maakt hier een string van om in java te gebruiken. Deze post(plaatst) hij in de map api/userPromo.
     @PostMapping("/api/userPromo")
     public User createPromo( @RequestParam("email")      String email,
                              @RequestParam("firstName")  String firstName,
@@ -90,7 +94,7 @@ public class UserController {
         User createdPromoUser = userRepository.save(promoUser);
         return createdPromoUser;
     }
-    
+    //Deze haalt een lijst van producers op uit api/producers op basis van de toegewezen role.
     @GetMapping("/api/producers")
     public List<User> getProducers()   {
         
@@ -98,7 +102,7 @@ public class UserController {
         
         return producers;
     }
-    
+    //Deze haalt een lijst van promotors op uit api/promotors op basis van de toegewezen role.
     @GetMapping("/api/promoters")
     public List<User> getPromoUsers()   {
         
@@ -107,11 +111,14 @@ public class UserController {
         return promoters;
     }
     
+    //Deze stuurd een opdracht om te verijderen op basis van een userId
     @PostMapping("/api/user/delete")
     public User deleteUser( @RequestParam("userId") Integer userId)   {
         
+        //De userId die met RequestParm is doorgegeven uit de frontend wordt gezocht in de database met users.
         Optional<User> u = userRepository.findById(userId);
         
+        //Als deze user is gevonden haalt hij hem op en kan user worden verwijdert. Als de user er niet is returnt hij null en doet niks.
         User dUser = u.isPresent() ? u.get()  : null;
         userRepository.delete(dUser);
         

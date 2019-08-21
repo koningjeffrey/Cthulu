@@ -37011,143 +37011,14 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ "./src/main/js/components/Comment.js":
-/*!*******************************************!*\
-  !*** ./src/main/js/components/Comment.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var Comment =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Comment, _React$Component);
-
-  function Comment() {
-    _classCallCheck(this, Comment);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Comment).apply(this, arguments));
-  }
-
-  _createClass(Comment, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "comment"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "UserName"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "iets"));
-    }
-  }]);
-
-  return Comment;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Comment);
-
-/***/ }),
-
 /***/ "./src/main/js/components/Comments.js":
 /*!********************************************!*\
   !*** ./src/main/js/components/Comments.js ***!
   \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Comment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Comment */ "./src/main/js/components/Comment.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-var Comments =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Comments, _React$Component);
-
-  function Comments(props) {
-    _classCallCheck(this, Comments);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Comments).call(this, props));
-  }
-
-  _createClass(Comments, [{
-    key: "getComments",
-    value: function getComments() {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/comments/' + this.props.currentFileId).then(function (response) {
-        var comments = response.data;
-
-        _this.setState({
-          comments: comments
-        });
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "griditem"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "3. Comments"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", null, "Whats up?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onSubmit: this.addComment,
-        className: "UserButton",
-        type: "submit",
-        name: "Send",
-        value: "Send"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Comment__WEBPACK_IMPORTED_MODULE_2__["default"], null));
-    }
-  }]);
-
-  return Comments;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Comments);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\src\\main\\js\\components\\Comments.js: Unexpected token, expected \";\" (30:20)\n\n  28 |     }\n  29 | \n> 30 |     getComments()   {\n     |                     ^\n  31 |         axios.get('/api/comments/' + this.props.currentFileId)\n  32 |             .then(response =>   {\n  33 |                 const comments = response.data;\n    at Object.raise (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:6325:17)\n    at Object.unexpected (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:7642:16)\n    at Object.semicolon (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:7624:40)\n    at Object.parseExpressionStatement (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:10364:10)\n    at Object.parseStatementContent (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:9963:19)\n    at Object.parseStatement (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:9829:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:10405:25)\n    at Object.parseBlockBody (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:10392:10)\n    at Object.parseTopLevel (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:9758:10)\n    at Object.parse (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:11270:17)\n    at parse (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\parser\\lib\\index.js:11306:38)\n    at parser (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:170:34)\n    at normalizeFile (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:138:11)\n    at runSync (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\core\\lib\\transformation\\index.js:44:43)\n    at runAsync (C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\core\\lib\\transformation\\index.js:35:14)\n    at C:\\Users\\cartm\\Documents\\GitHub\\Cthulu\\3.Front end en Back end development\\Cthulhu_2.1\\node_modules\\@babel\\core\\lib\\transform.js:34:34\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
 
 /***/ }),
 
@@ -37733,10 +37604,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Nav */ "./src/main/js/components/Nav.js");
-/* harmony import */ var _Upload__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Upload */ "./src/main/js/components/Upload.js");
-/* harmony import */ var _PlayList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PlayList */ "./src/main/js/components/PlayList.js");
-/* harmony import */ var _Comments__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Comments */ "./src/main/js/components/Comments.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Nav */ "./src/main/js/components/Nav.js");
+/* harmony import */ var _Upload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Upload */ "./src/main/js/components/Upload.js");
+/* harmony import */ var _PlayList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PlayList */ "./src/main/js/components/PlayList.js");
+/* harmony import */ var _Comments__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Comments */ "./src/main/js/components/Comments.js");
+/* harmony import */ var _Comments__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Comments__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -37756,6 +37629,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -37826,16 +37700,16 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Nav__WEBPACK_IMPORTED_MODULE_2__["default"], this.props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Nav__WEBPACK_IMPORTED_MODULE_3__["default"], this.props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Upload__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Upload__WEBPACK_IMPORTED_MODULE_4__["default"], {
         currentUser: this.state.currentUser,
         addFile: this.getFiles
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayList__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, this.props, {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayList__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
         files: this.state.files,
         currentFileId: this.state.currentFileId,
         setCurrentFileId: this.setCurrentFileId
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Comments__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Comments__WEBPACK_IMPORTED_MODULE_6___default.a, _extends({}, this.props, {
         currentFileId: this.state.currentFileId
       }))));
     }
@@ -37844,7 +37718,7 @@ function (_React$Component) {
   return Producer;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Producer);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Producer));
 
 /***/ }),
 
@@ -37863,6 +37737,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Nav */ "./src/main/js/components/Nav.js");
 /* harmony import */ var _Comments__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Comments */ "./src/main/js/components/Comments.js");
+/* harmony import */ var _Comments__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Comments__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _PlayerPromo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PlayerPromo */ "./src/main/js/components/PlayerPromo.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -37946,7 +37821,7 @@ function (_React$Component) {
         className: "grid"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PlayerPromo__WEBPACK_IMPORTED_MODULE_4__["default"], {
         files: this.state.files
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Comments__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Comments__WEBPACK_IMPORTED_MODULE_3___default.a, {
         id: "item2"
       })));
     }

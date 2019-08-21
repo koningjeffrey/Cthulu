@@ -2,6 +2,7 @@
 :root{
   --pink: #ff60ff;
   --white: #fff;
+  --black: #000000;
 }
 /*--------------------General styles--------------------*/
 html{
@@ -41,10 +42,14 @@ p {
 .Nav img{
   height: 60px;
 }
+
+/*--------------------Preset selecter--------------------*/
+
+
+
 /*--------------------Menu--------------------*/
 
 .menu{
-  
   display: block;
   padding: 10px;
   z-index: 9;
@@ -53,7 +58,13 @@ p {
 .menu ul{
   display: flex;
   justify-content: space-between;
+}
+
+.menu li{
   text-decoration: none;
+  display: block;
+  padding: 10px;
+  z-index: 9;
 }
 
 /*--------------------Chat--------------------*/
@@ -221,31 +232,6 @@ h2 {
   left: 0;
   top: 0;
   opacity: 0;
-}
-
-
-@media only screen and (max-width: 1200px) {
-  .Nav img{
-      height: 60px;
-  }
-  /*position column for mobile*/
-  .grid {
-      grid-template-columns: repeat(1, 1fr);
-      width: 100%;
-      top: 100px;
-      left: 0;
-      transform: translate(0,0);
-  }
-  /*size of the box*/
-  .griditem{
-      width: 90%;
-      margin-left: 50%;
-      margin-bottom: 20px;
-      transform: translate(-50%);
-  }
-  .drop-box{
-      display: none;
-  }
 }
 
 /*-----------------Upload------------*/
@@ -433,4 +419,28 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@media only screen and (max-width: 1200px) {
+  .Nav img{
+      height: 60px;
+  }
+  /*position column for mobile*/
+  .grid {
+      grid-template-columns: repeat(1, 1fr);
+      width: 100%;
+      top: 100px;
+      left: 0;
+      transform: translate(0,0);
+  }
+  /*size of the box*/
+  .griditem{
+      width: 90%;
+      margin-left: 50%;
+      margin-bottom: 20px;
+      transform: translate(-50%);
+  }
+  .drop-box{
+      display: none;
+  }
 }
