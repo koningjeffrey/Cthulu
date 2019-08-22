@@ -7,24 +7,24 @@ class Comments extends React.Component {
     
     constructor(props) {
     super(props);
-    this.state={value: "Whats up?", commentFields:"", currentUser:  this.props.currentUser};
+    this.state={value: "Whats up?", comments:[], currentUser: this.props.currentUser, currentFileId: this.props.currentFileId};
 
-    this.handleChange=this.handleChange.bind(this)
-    this.addComment=this.addComment.bind(this)
+    this.handleChange=this.handleChange.bind(this);
+    this.addComment=this.addComment.bind(this);
+    this.getComments=this.getComments.bind(this);
     }
 
     addComment(e)  {
       e.preventDefault();
       const data = new FormData();
-          data.append("commentField", this.commentFiels.current.value);
-          data.append('userId', this.props.currentUser.userId);
+          data.append("value", this.state.value);
+          data.append('currentFileId', this.props.currentFileId);
 
           axios.post(`/api/comment`, data)
             .then(result => {
                 const createComment = result.data;
-                this.loginUser();
+                this.getComments();
         });    
-    }
     }
 
     getComments()   {
@@ -51,11 +51,18 @@ class Comments extends React.Component {
                   <option value="This demo is awesome! The Don would like to invite you.">Invite</option>
                 </select>
                 </div>
+                <form onSubmit={this.addComment}>
                 <textarea value={this.state.value} onChange={this.handleChange}>
                   {this.state.value}
                 </textarea>
-                <input onSubmit={this.addComment} className="UserButton" type="submit" name="Send" value="Send"/>
-                <Comment/> 
+                <input className="UserButton" type="submit" name="Send" value="Send"/>
+                </form>
+                {this.state.comments.map(comment =>
+                <Comment 
+                  currentUser={this.props.currentUser}
+                  comment={comment}
+                  key={comment.commentId}/>
+                )}  
             </div>
       );
     }

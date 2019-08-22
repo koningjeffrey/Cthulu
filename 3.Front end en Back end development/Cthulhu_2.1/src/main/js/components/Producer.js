@@ -12,7 +12,7 @@ class Producer extends React.Component {
     constructor(props)  {
         super(props);
         this.state = {  files: [], comments: [], currentFile: {}, currentUser:  {}, 
-                        currentUserId: 0, currentFileId: 0};
+                        currentUserId: 0, currentFileId: 1};
         this.loadUser = this.loadUser.bind(this);
         this.getFiles = this.getFiles.bind(this);
         this.setCurrentFileId = this.setCurrentFileId.bind(this);
@@ -34,7 +34,7 @@ class Producer extends React.Component {
           });
     }
     setCurrentFileId(currentFileId)  {
-        this.setState({currentFileId: currentFileId});
+        this.setState({currentFileId: 1});
     }
     
     render() {
@@ -44,7 +44,7 @@ class Producer extends React.Component {
                 <div className="grid">
                     <Upload currentUser={this.state.currentUser} addFile={this.getFiles}/>
                     <PlayList {...this.props} files={this.state.files} currentFileId={this.state.currentFileId} setCurrentFileId={this.setCurrentFileId} />
-                    <Comments {...this.props} currentFileId={this.state.currentFileId}/>
+                    <Comments {...this.props} currentFileId={this.state.currentFileId} currentUser={this.state.currentUser}/>
                 </div>
             </div>
         );

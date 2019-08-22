@@ -5,8 +5,8 @@ class Comment extends React.Component{
     render(){
         return (
             <div className="comment">
-                <p>UserName</p>
-                <p>iets</p>
+                <p>{this.props.currentUser.email}</p>
+                <p>{this.props.comment.commentField}</p>
             </div>
         );
     }
