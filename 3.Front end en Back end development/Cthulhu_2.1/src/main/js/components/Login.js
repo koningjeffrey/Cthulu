@@ -78,6 +78,8 @@ class Login extends React.Component {
                   <input type="submit" name="submit" value="Login User"/>
                   <div className="regfor">
                     <Link to='/Register'>Register account</Link>
+                    <br/>
+                    <a href={"mailto:don@diablo.com?subject=Forgot my password"}>Forgot password?</a>
                   </div>  
               </form>
             </div>

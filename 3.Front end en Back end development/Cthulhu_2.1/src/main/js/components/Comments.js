@@ -13,6 +13,10 @@ class Comments extends React.Component {
     this.addComment=this.addComment.bind(this);
     this.getComments=this.getComments.bind(this);
     }
+    //Laadt de lijst met comments gelijk.
+    componentDidMount(){
+      this.getComments();
+    }
 
     addComment(e)  {
       e.preventDefault();
@@ -45,10 +49,12 @@ class Comments extends React.Component {
                 <h2>3. Comments</h2>
                 <div className="custom-select">
                 <select style={{backgroundColor: 'Black', color: 'white', width: '100%'}} onChange={this.handleChange}>
-                  <option value="Woow, that sound great">Great</option>
-                  <option value="Not bad, keep trying">Mwa</option>
+                  <option value="Whats up amigo?">Preset..:</option>
+                  <option value="Woow, that sound great.">Great</option>
+                  <option value="Not bad, keep trying.">Mwa</option>
                   <option value="Please, just delete your account.">Bad</option>
                   <option value="This demo is awesome! The Don would like to invite you.">Invite</option>
+                  <option value="Maybe this will help: https://www.youtube.com/watch?v=dQw4w9WgXcQ">Try this!</option>
                 </select>
                 </div>
                 <form onSubmit={this.addComment}>

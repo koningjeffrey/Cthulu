@@ -37126,9 +37126,15 @@ function (_React$Component) {
     _this.addComment = _this.addComment.bind(_assertThisInitialized(_this));
     _this.getComments = _this.getComments.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } //Laadt de lijst met comments gelijk.
+
 
   _createClass(Comments, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getComments();
+    }
+  }, {
     key: "addComment",
     value: function addComment(e) {
       var _this2 = this;
@@ -37180,14 +37186,18 @@ function (_React$Component) {
         },
         onChange: this.handleChange
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "Woow, that sound great"
+        value: "Whats up amigo?"
+      }, "Preset..:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Woow, that sound great."
       }, "Great"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "Not bad, keep trying"
+        value: "Not bad, keep trying."
       }, "Mwa"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "Please, just delete your account."
       }, "Bad"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "This demo is awesome! The Don would like to invite you."
-      }, "Invite"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "Invite"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Maybe this will help: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      }, "Try this!"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.addComment
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: this.state.value,
@@ -37371,7 +37381,9 @@ function (_React$Component) {
         className: "regfor"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/Register"
-      }, "Register account"))));
+      }, "Register account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "mailto:don@diablo.com?subject=Forgot my password"
+      }, "Forgot password?"))));
     }
   }]);
 
