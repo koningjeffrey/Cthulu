@@ -30,6 +30,7 @@ class UserProcuders extends React.Component {
                     {this.state.producers.map(producer =>
                     <UserProducer   key={producer.userId}
                                     producer={producer}
+                                    updateProducers={this.getProducers}
                     />
                     )}
                 </div>

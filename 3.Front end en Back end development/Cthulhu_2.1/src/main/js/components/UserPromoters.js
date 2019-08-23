@@ -30,6 +30,7 @@ class UserPromoters extends React.Component {
                     {this.state.promoters.map(promoter =>
                     <UserPromo  key={promoter.userId}
                                 promoter={promoter}
+                                updatePromoters={this.getPromoters}
                     />
                     )}
                 </div>

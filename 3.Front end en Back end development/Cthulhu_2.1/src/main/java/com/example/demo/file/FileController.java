@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import com.example.demo.util.Converter;
 
 @RestController
 public class FileController {
@@ -78,11 +79,9 @@ public class FileController {
     public File createFile(     @RequestParam("userId")     Integer userId,
                                 @RequestParam("title")      String title,
                                 @RequestParam("file")       MultipartFile file) throws Exception {
-
+        
         Date timestamp = new Date();
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        File f = new File(filename, userId, title, timestamp.toString());
-        File createdFile = fileRepository.save(f);
         
         Optional<User> fUser = userRepository.findById(userId);
         
@@ -90,6 +89,12 @@ public class FileController {
         
         uploadStorage.loadDirectory(dUser.getEmail());
         uploadStorage.store(file);
+        Path absolutePath = uploadStorage.load(filename).toAbsolutePath();
+        
+        String newFileName = Converter.convertFile(absolutePath, uploadStorage.getUserLocation(), filename);
+
+        File f = new File(newFileName, userId, title, timestamp.toString());
+        File createdFile = fileRepository.save(f);
         return createdFile;
     }
     

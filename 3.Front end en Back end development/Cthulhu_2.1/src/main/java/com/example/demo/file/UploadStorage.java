@@ -70,6 +70,10 @@ public class UploadStorage {
     public Path load(String filename) {
         return userLocation.resolve(filename);
     }
+
+    public Path getUserLocation(){
+        return userLocation;
+    }
     
     public Stream<Path> loadAll() throws Exception {
         try {

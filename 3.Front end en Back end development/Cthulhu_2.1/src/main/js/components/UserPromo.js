@@ -14,6 +14,7 @@ class UserPromo extends React.Component {
             .then(res => {
                 const deletedUser = res.data;
                 console.log("User succesfully deleted!" + deletedUser);
+                this.props.updatePromoters();
           });
     }
     

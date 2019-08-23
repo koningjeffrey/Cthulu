@@ -49,7 +49,7 @@ class Upload extends React.Component {
                         </div>
                         <div className="ubtn">
                                 <button className="btn">Upload file</button>
-                                <input type="file" name="file" accept="audio/mp3" onChange={this.setFileToUpload}/>
+                                <input type="file" name="file" accept=".mp3,.ogg,.wav,.kut" onChange={this.setFileToUpload}/>
                         </div>
                         <div className="inputBox">
                             <input type="text" name="title" ref={this.title} onChange={this.setTitle}/>
