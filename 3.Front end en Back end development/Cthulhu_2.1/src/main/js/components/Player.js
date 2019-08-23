@@ -5,7 +5,7 @@ class Player extends React.Component {
     render() {
       return (
                 <div className="UserBlock" onClick={() => {this.props.setCurrentFileId(this.props.value)}}>
-                   <p>{this.props.file.filename}</p>
+                   <h2>{this.props.file.filename}</h2>
                    <p>{this.props.currentUser.email}</p>
                    <input className="UserButton" type="submit" name="Play" value="Play"/>
                     <p>Rating:</p>

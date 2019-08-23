@@ -37058,7 +37058,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comment"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.currentUser.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.comment.commentField));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, this.props.currentUser.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.comment.commentField));
     }
   }]);
 
@@ -37707,7 +37707,7 @@ function (_React$Component) {
         onClick: function onClick() {
           _this.props.setCurrentFileId(_this.props.value);
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.file.filename), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.currentUser.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.file.filename), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.currentUser.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "UserButton",
         type: "submit",
         name: "Play",
