@@ -76,34 +76,36 @@ class Register extends React.Component {
     }
 
     render() {
-      return  <div className="box">
-      <h1>Register to become Hexalent</h1>
-      <h2>in search of exellent talent.</h2>
-      <form onSubmit={this.addUser}>
-      <div className="inputBox">
-              <input type="text" ref={this.rEmail} onBlur={this.check}/>
-              <label>E-mail</label>
-          </div>
-          <div className="inputBox">
-              <input type="text" ref={this.rFirstName} onBlur={this.check}/>
-              <label>First name</label>
-          </div>
-          <div className="inputBox">
-              <input type="text" ref={this.rLastName} onBlur={this.check}/>
-              <label>Last name</label>
-          </div>
-          <div className="inputBox">
-              <input type="text" ref={this.rCountry} onBlur={this.check}/>
-              <label>Country</label>
-          </div>
-          <div className="inputBox">
-              <input type="password" ref={this.rPassword} onBlur={this.check}/>
-              <label>Password</label>
-          </div>
-          <input type="submit" name="Submit" value="Submit" disabled={this.state.button}/>
-      </form>
-  </div>;
+      return ( 
+      <div className="box">
+        <h1>Register to become Hexalent</h1>
+        <h2>in search of exellent talent.</h2>
+        <form onSubmit={this.addUser}>
+            <div className="inputBox">
+                <input type="text" ref={this.rEmail} onBlur={this.check}/>
+                <label>E-mail</label>
+            </div>
+            <div className="inputBox">
+                <input type="text" ref={this.rFirstName} onBlur={this.check}/>
+                <label>First name</label>
+            </div>
+            <div className="inputBox">
+                <input type="text" ref={this.rLastName} onBlur={this.check}/>
+                <label>Last name</label>
+            </div>
+            <div className="inputBox">
+                <input type="text" ref={this.rCountry} onBlur={this.check}/>
+                <label>Country</label>
+            </div>
+            <div className="inputBox">
+                <input type="password" ref={this.rPassword} onBlur={this.check}/>
+                <label>Password</label>
+            </div>
+            <input type="submit" name="Submit" value="Submit" disabled={this.state.button}/>
+        </form>
+      </div>
+      );
     }
-  }
+}
 
 export default Register

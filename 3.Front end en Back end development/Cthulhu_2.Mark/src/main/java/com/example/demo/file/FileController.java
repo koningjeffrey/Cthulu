@@ -2,6 +2,8 @@ package com.example.demo.file;
 
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
+import com.example.demo.util.Converter;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,15 +82,18 @@ public class FileController {
 
         Date timestamp = new Date();
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        File f = new File(filename, userId, title, timestamp.toString());
-        File createdFile = fileRepository.save(f);
         
         Optional<User> fUser = userRepository.findById(userId);
-        
         User dUser = fUser.isPresent() ? fUser.get()  : null;
         
         uploadStorage.loadDirectory(dUser.getEmail());
         uploadStorage.store(file);
+        Path absolutePath = uploadStorage.load(filename).toAbsolutePath();
+        
+        String newFileName = Converter.convertFile(absolutePath, uploadStorage.getUserLocation(), filename);
+        
+        File f = new File(newFileName, userId, title, timestamp.toString());
+        File createdFile = fileRepository.save(f);
         return createdFile;
     }
     

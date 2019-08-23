@@ -16,6 +16,7 @@ class UserProducer extends React.Component {
             .then(res => {
                 const blockedUser = res.data;
                 console.log("User succesfully blocked!" + blockedUser);
+                this.props.updateProducers()
           });
     }
     unblockProducer()   {
@@ -25,6 +26,7 @@ class UserProducer extends React.Component {
                 .then(res => {
                     const unblockedUser = res.data;
                     console.log("User succesfully unblocked!" + unblockedUser);
+                    this.props.updateProducers();
         });
     }
     deleteProducer()    {
@@ -34,6 +36,7 @@ class UserProducer extends React.Component {
             .then(res => {
                 const deletedUser = res.data;
                 console.log("User succesfully deleted!" + deletedUser);
+                this.props.updateProducers();
           });
     }
     render() {

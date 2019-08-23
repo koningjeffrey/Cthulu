@@ -16,10 +16,12 @@ html{
 h1{
   color: #fff;
   text-align: center;
+  cursor: default;
 }
 
 h2{
   text-align: center;
+  cursor: default;
 }
 
 .error {
@@ -34,6 +36,7 @@ p {
   color: #ff60ff;
   text-align: center;
 }
+
 /*--------------------Nav--------------------*/
 .Nav{
   right: auto;
@@ -155,16 +158,25 @@ input[type="submit"] {
   cursor: pointer;
   border-radius: 5px;
 }
-
-input :disabled {
+input[type="submit"]:hover {
   background: transparent;
   border: none;
   outline: none;
   color: #fff;
-  background: var(--red);
+  background: magenta;
   padding: 10px 20px;
   cursor: pointer;
-  border-radius: 5px;  
+  border-radius: 5px;
+}
+input[type="submit"]:focus {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: purple;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 /*--------------------Producer--------------------*/
@@ -243,7 +255,6 @@ h2 {
   top: 0;
   opacity: 0;
 }
-
 
 @media only screen and (max-width: 1200px) {
   .Nav img{
@@ -374,7 +385,16 @@ h2 {
     border-radius: 10px;
     margin-top: 5px;
   }
-
+  .comment:hover{
+    background: black;
+    color: #fff;
+    padding: 9px;
+    border: 2px solid magenta;
+    border-radius: 10px;
+    margin-top: 5px;
+    cursor: default;
+  }
+  
   textarea{
     box-sizing: border-box;
     width: 100%;
@@ -401,7 +421,23 @@ h2 {
     align-items: center;
   }
   /*-----------------Admin--------------------*/
-
+  
+  /*----------------Audio-Player------------------*/
+  /*verkregen via: 
+  https://stackoverflow.com/questions/4126708/is-it-possible-to-style-html5-audio-tag*/ 
+  
+  audio {
+    justify-content: center;  
+  }
+  audio::-webkit-media-controls-panel {
+    background: #ff60ff;
+  }
+  audio::-webkit-media-controls-play-button {
+    color: white;
+  }
+  audio::-webkit-media-controls-mute-button {
+    color:white;
+  }
   /*--------------------UserBlock-----------------*/
 
   .UserBlock{
@@ -409,6 +445,16 @@ h2 {
     color: #fff;
     padding: 10px;
     border: 1px solid #999;
+    border-radius: 10px;
+    margin-bottom: 5px;
+	cursor: pointer;
+  }
+  
+  .UserBlock:hover{
+    background: black;
+    color: #fff;
+    padding: 9px;
+    border: 2px solid magenta;
     border-radius: 10px;
     margin-bottom: 5px;
 	cursor: pointer;

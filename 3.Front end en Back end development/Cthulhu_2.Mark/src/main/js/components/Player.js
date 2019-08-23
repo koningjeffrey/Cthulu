@@ -21,8 +21,14 @@ class Player extends React.Component {
     render() {
         return (
                 <div className="UserBlock" onClick={() => {this.props.setCurrentFileId(this.props.file.fileId)}}>
-                   <b><p className="title">{this.props.file.title}</p></b>
-                   <audio controls src={this.props.upload}></audio>
+                    <b>
+                        <p className="title">{this.props.file.title}</p>
+                    </b>
+                    <p className="title">
+                        <audio controls src={this.props.upload}>
+                        Your browser does not support the audio element.
+                        </audio>
+                    </p>
                     {this.props.currentUser.userRole === 0 &&
                     <p>Rating:</p>}
                     {this.props.currentUser.userRole === 1 &&
@@ -30,13 +36,13 @@ class Player extends React.Component {
                     {this.props.file.fileValue === 0 && this.props.currentUser.userRole === 0 &&
                     <p>No rating yet</p>}
                     {this.props.file.fileValue === 1 && this.props.currentUser.userRole === 0 &&
-                    <img src="Dislike.png" alt="Dislike"/>}
+                        <img src="Dislike.png" alt="Dislike"/>}
                     {this.props.file.fileValue === 2 && this.props.currentUser.userRole === 0 &&
-                    <img src="Like.png" alt="Like"/>}
+                        <img src="Like.png" alt="Like"/>}
                     {this.props.currentUser.userRole === 1 &&
-                    <img src="Like.png" alt="Like" onClick={() => {this.setValue(2)}}/>}
+                        <img src="Like.png" alt="Like" onClick={() => {this.setValue(2)}}/>}
                     {this.props.currentUser.userRole === 1 &&
-                    <img src="Dislike.png" alt="Dislike" onClick={ () => {this.setValue(1)}}/>}
+                        <img src="Dislike.png" alt="Dislike" onClick={ () => {this.setValue(1)}}/>}
                 </div>
         );
     }

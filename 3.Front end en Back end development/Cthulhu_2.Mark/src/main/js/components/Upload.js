@@ -21,7 +21,7 @@ class Upload extends React.Component {
     addFile(e)    {
         e.preventDefault();
         
-        if(this.state.tile !== "" && this.state.uploadFile !== null) {
+        if(this.state.title !== "" && this.state.uploadFile !== null) {
             const data = new FormData();
                 data.append('file', this.state.uploadFile);
                 data.append('userId', this.props.currentUser.userId);
@@ -54,13 +54,13 @@ class Upload extends React.Component {
                         </div>
                         <div className="ubtn">
                                 <button className="btn">Upload file</button>
-                                <input type="file" name="file" accept="audio/mp3" onChange={this.setFileToUpload}/>
+                                <input type="file" name="file"accept=".mp3,.ogg,.wav,.kut" onChange={this.setFileToUpload}/>
                         </div>
                         <div className="inputBox">
                             <input type="text" name="title" ref={this.title} onChange={this.setTitle}/>
                             <label>Title</label>
                         </div>
-                        <p className="error">{this.state.message}</p>
+                        <p>{this.state.message}</p>
                         <input type="submit" name="submit" value="Submit"/>
                     </div>
                     </form>

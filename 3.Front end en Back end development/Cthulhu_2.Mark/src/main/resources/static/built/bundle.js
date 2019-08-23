@@ -33100,10 +33100,12 @@ function (_React$Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "title"
-      }, this.props.file.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
+      }, this.props.file.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("audio", {
         controls: true,
         src: this.props.upload
-      }), this.props.currentUser.userRole === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Rating:"), this.props.currentUser.userRole === 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Rate this file:"), this.props.file.fileValue === 0 && this.props.currentUser.userRole === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No rating yet"), this.props.file.fileValue === 1 && this.props.currentUser.userRole === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, "Your browser does not support the audio element.")), this.props.currentUser.userRole === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Rating:"), this.props.currentUser.userRole === 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Rate this file:"), this.props.file.fileValue === 0 && this.props.currentUser.userRole === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No rating yet"), this.props.file.fileValue === 1 && this.props.currentUser.userRole === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "Dislike.png",
         alt: "Dislike"
       }), this.props.file.fileValue === 2 && this.props.currentUser.userRole === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -34037,7 +34039,7 @@ function (_React$Component) {
 
       e.preventDefault();
 
-      if (this.state.tile !== "" && this.state.uploadFile !== null) {
+      if (this.state.title !== "" && this.state.uploadFile !== null) {
         var data = new FormData();
         data.append('file', this.state.uploadFile);
         data.append('userId', this.props.currentUser.userId);
@@ -34084,7 +34086,7 @@ function (_React$Component) {
       }, "Upload file"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         name: "file",
-        accept: "audio/mp3",
+        accept: ".mp3,.ogg,.wav,.kut",
         onChange: this.setFileToUpload
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "inputBox"
@@ -34093,9 +34095,7 @@ function (_React$Component) {
         name: "title",
         ref: this.title,
         onChange: this.setTitle
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "error"
-      }, this.state.message), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.message), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         name: "submit",
         value: "Submit"
@@ -34164,31 +34164,43 @@ function (_React$Component) {
   _createClass(UserProducer, [{
     key: "blockProducer",
     value: function blockProducer() {
+      var _this2 = this;
+
       var data = new FormData();
       data.append("userId", this.props.producer.userId);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user/block", data).then(function (res) {
         var blockedUser = res.data;
         console.log("User succesfully blocked!" + blockedUser);
+
+        _this2.props.updateProducers();
       });
     }
   }, {
     key: "unblockProducer",
     value: function unblockProducer() {
+      var _this3 = this;
+
       var data = new FormData();
       data.append("userId", this.props.producer.userId);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user/unblock", data).then(function (res) {
         var unblockedUser = res.data;
         console.log("User succesfully unblocked!" + unblockedUser);
+
+        _this3.props.updateProducers();
       });
     }
   }, {
     key: "deleteProducer",
     value: function deleteProducer() {
+      var _this4 = this;
+
       var data = new FormData();
       data.append("userId", this.props.producer.userId);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user/delete", data).then(function (res) {
         var deletedUser = res.data;
         console.log("User succesfully deleted!" + deletedUser);
+
+        _this4.props.updateProducers();
       });
     }
   }, {
@@ -34300,12 +34312,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "griditem"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "1. Producers"), this.state.producers.map(function (producer) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProducer__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: producer.userId,
-          producer: producer
+          producer: producer,
+          updateProducers: _this3.getProducers
         });
       })));
     }
@@ -34370,11 +34385,15 @@ function (_React$Component) {
   _createClass(UserPromo, [{
     key: "deletePromoter",
     value: function deletePromoter() {
+      var _this2 = this;
+
       var data = new FormData();
       data.append("userId", this.props.promoter.userId);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user/delete", data).then(function (res) {
         var deletedUser = res.data;
         console.log("User succesfully deleted!" + deletedUser);
+
+        _this2.props.updatePromoters();
       });
     }
   }, {
@@ -34473,12 +34492,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "griditem"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "2. Promoters"), this.state.promoters.map(function (promoter) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserPromo__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: promoter.userId,
-          promoter: promoter
+          promoter: promoter,
+          updatePromoters: _this3.getPromoters
         });
       })));
     }
