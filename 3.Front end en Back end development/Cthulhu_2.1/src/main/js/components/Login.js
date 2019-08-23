@@ -8,10 +8,8 @@ class Login extends React.Component {
     
     constructor(props) {
         super(props);
-            this.state = {  currentUser:  null, 
-                            currentUserId: 0,
-                            currentUserRole: 0
-                        };
+            this.state = {  currentUser:  null, currentUserId: 0,
+                            currentUserRole: 0 };
 
             this.saveLocalStorage = this.saveLocalStorage.bind(this);
             this.loadLocalStorage = this.loadLocalStorage.bind(this);
@@ -20,16 +18,7 @@ class Login extends React.Component {
 
             this.lEmail = React.createRef();
             this.lPassword = React.createRef();
-    }
-        RegexUser(){
-            this.lEmail = this.lEmail.current.value;
-            RegexEmail = /\w+@\w./;
-            createP(RegexEmail.test(lEmail));
-        }
-
-        RegexEmail(){
-            
-        }
+	}
         
         componentDidMount() {
             this.loadLocalStorage();
@@ -78,8 +67,6 @@ class Login extends React.Component {
                   <input type="submit" name="submit" value="Login User"/>
                   <div className="regfor">
                     <Link to='/Register'>Register account</Link>
-                    <br/>
-                    <a href={"mailto:don@diablo.com?subject=Forgot my password"}>Forgot password?</a>
                   </div>  
               </form>
             </div>

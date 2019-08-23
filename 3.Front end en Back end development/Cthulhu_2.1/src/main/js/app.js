@@ -8,6 +8,7 @@ import Register from './components/Register';
 import Producer from './components/Producer';
 import Promo from './components/Promo';
 import Admin from './components/Admin';
+import Settings from './components/Settings';
 
 class App extends React.Component {
 
@@ -44,6 +45,8 @@ class App extends React.Component {
                                          render={(props) => <Promo {...props} currentUser={this.state.currentUser} /> } />
                             <Route exact path="/Admin"
                                          render={(props) => <Admin {...props} currentUser={this.state.currentUser} /> } />
+                            <Route exact path="/Settings"
+                                         render={(props) => <Settings {...props} currentUser={this.state.currentUser} /> } />                     
                         </div>
                       </Switch>
                     </Router>

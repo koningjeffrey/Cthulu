@@ -1,32 +1,30 @@
 import React from 'react';
-import axios from 'axios';
 import Player from './Player'
 
 class PlayList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { currentFileId: 0 };
+        this.state = { currentFileId: 0};
         this.setCurrentFileId = this.setCurrentFileId.bind(this);
     }
+    
     setCurrentFileId(currentFileId)  {
-        console.log(currentFileId);
         this.setState({currentFileId: currentFileId});
-        this.props.setCurrentFileId(this.state.currentFileId);
+        this.props.setCurrentFileId(currentFileId);
     }
     
     render() {
       return (
                 <div className="griditem">
                     <h2>2. PlayList</h2>
-                    
-                    {this.props.files.map(file =>
+                    {this.props.uploads.map(upload =>
                     
                     <Player currentUser={this.props.currentUser}
                             setCurrentFileId={this.setCurrentFileId}
-                            file={file}
-                            key={file.fileId} 
-                            value={file.fileId}/>              
+                            file={upload.file}
+                            upload={upload.path}
+                            key={upload.file.fileId} />              
                     )}
             
                 </div>

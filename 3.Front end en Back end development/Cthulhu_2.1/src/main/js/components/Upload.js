@@ -5,26 +5,36 @@ class Upload extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {  currentUser:  {}, uploadFile: [], message: ""};
+        this.state = {  currentUser:  {}, uploadFile: {}, title: null, message: ""};
+        
         this.addFile = this.addFile.bind(this);
         this.setFileToUpload = this.setFileToUpload.bind(this);
+        this.setTitle = this.setTitle.bind(this);
+        
+        this.title = React.createRef();
     }
     setFileToUpload(e) {
         console.log(e.target.files[0]);
-        this.setState({uploadFile: e.target.files});
-    }    
+        this.setState({uploadFile: e.target.files[0]});
+    }
+    
     addFile(e)    {
         e.preventDefault();
+        console.log(this.state.title);
         const data = new FormData();
-            data.append('file', this.state.uploadFile[0]);
+            data.append('file', this.state.uploadFile);
             data.append('userId', this.props.currentUser.userId);
+            data.append('title', this.state.title);
 
-        axios.post(`/api/file`, data)
+        axios.post(`/api/createFile`, data)
             .then(result => {
                 const createdFile = result.data;
                 this.setState({ message: "File Added!" });
                 this.props.addFile();
         });
+    }
+    setTitle()  {
+        this.setState({title: this.title.current.value});
     }
     
     render() {
@@ -42,9 +52,10 @@ class Upload extends React.Component {
                                 <input type="file" name="file" accept="audio/mp3" onChange={this.setFileToUpload}/>
                         </div>
                         <div className="inputBox">
-                            <input type="text" name="title"/>
+                            <input type="text" name="title" ref={this.title} onChange={this.setTitle}/>
                             <label>Title</label>
                         </div>
+                        <p>{this.state.message}</p>
                         <input type="submit" name="submit" value="Submit"/>
                     </div>
                     </form>

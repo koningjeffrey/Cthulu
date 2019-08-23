@@ -25,7 +25,7 @@ public class CommentController {
     }
     
     @PostMapping("/api/comment")
-    public Comment createComment(   @RequestParam("value")   String commentField, 
+    public Comment createComment(   @RequestParam("value")          String commentField, 
                                     @RequestParam("currentFileId")  Integer fileId) {
         
         Comment c = new Comment(commentField, fileId);
@@ -37,10 +37,9 @@ public class CommentController {
     public Comment deleteComment( @RequestParam("commentId") Integer commentId)   {
         
         Optional<Comment> c = commentRepository.findById(commentId);
-        
         Comment dComment = c.isPresent() ? c.get()  : null;
-        commentRepository.delete(dComment);
         
+        commentRepository.delete(dComment);
         return dComment;
     }
 }

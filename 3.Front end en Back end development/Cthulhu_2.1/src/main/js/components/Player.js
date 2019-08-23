@@ -1,13 +1,18 @@
 import React from 'react';
+import axios from 'axios';
 
 class Player extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { };
+    }
     
     render() {
       return (
-                <div className="UserBlock" onClick={() => {this.props.setCurrentFileId(this.props.value)}}>
-                   <p>{this.props.file.filename}</p>
-                   <p>{this.props.currentUser.email}</p>
-                   <input className="UserButton" type="submit" name="Play" value="Play"/>
+                <div className="UserBlock" onClick={() => {this.props.setCurrentFileId(this.props.file.fileId)}}>
+                   <p>{this.props.file.title}</p>
+                   <audio controls src={this.props.upload}></audio>
                     <p>Rating:</p>
                     {this.props.file.fileValue === 0 &&
                     <p>No rating yet</p>}

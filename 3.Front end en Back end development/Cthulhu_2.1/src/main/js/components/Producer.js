@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {withRouter} from 'react-router-dom'
 
 import Nav from './Nav'
 import Upload from './Upload'
@@ -11,11 +10,11 @@ class Producer extends React.Component {
     
     constructor(props)  {
         super(props);
-        this.state = {  files: [], comments: [], currentFile: {}, currentUser:  {}, 
-                        currentUserId: 0, currentFileId: 1};
+        this.state = {  uploads: [], comments: [], currentUser:  {}, 
+                        currentUserId: 0, currentFileId: 0};
         this.loadUser = this.loadUser.bind(this);
-        this.getFiles = this.getFiles.bind(this);
         this.setCurrentFileId = this.setCurrentFileId.bind(this);
+        this.getUploads = this.getUploads.bind(this);
     }
     componentDidMount() {
             this.loadUser();
@@ -23,18 +22,19 @@ class Producer extends React.Component {
     
     loadUser()  {
         this.setState({currentUser: this.props.currentUser, currentUserId: this.props.currentUser.userId});
-        this.getFiles();
+        this.getUploads();
     }
     
-    getFiles() {
-	  axios.get(`/api/files/` + this.props.currentUser.userId)
-            .then(res => {
-                const files = res.data;
-                this.setState({ files: files });
-          });
-    }
     setCurrentFileId(currentFileId)  {
-        this.setState({currentFileId: 1});
+        this.setState({currentFileId: currentFileId});
+    }
+    
+    getUploads() {
+	axios.get(`/api/uploads/`+ this.props.currentUser.userId)
+            .then(res => {
+                const uploads = res.data;
+                this.setState({uploads:uploads});
+    });
     }
     
     render() {
@@ -42,13 +42,17 @@ class Producer extends React.Component {
             <div>
             <Nav {...this.props}/>
                 <div className="grid">
-                    <Upload currentUser={this.state.currentUser} addFile={this.getFiles}/>
-                    <PlayList {...this.props} files={this.state.files} currentFileId={this.state.currentFileId} setCurrentFileId={this.setCurrentFileId} />
-                    <Comments {...this.props} currentFileId={this.state.currentFileId} currentUser={this.state.currentUser}/>
+                    <Upload                     currentUser={this.state.currentUser} 
+                                                addFile={this.getUploads}/>
+                    <PlayList {...this.props}   uploads={this.state.uploads} 
+                                                currentFileId={this.state.currentFileId} 
+                                                setCurrentFileId={this.setCurrentFileId} />
+                    <Comments {...this.props}   currentUser={this.state.currentUser} 
+                                                currentFileId={this.state.currentFileId}/>
                 </div>
             </div>
         );
     }
   }
 
-export default withRouter(Producer)
+export default Producer

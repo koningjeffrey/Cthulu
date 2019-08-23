@@ -1,4 +1,3 @@
-//User wordt gebruikt om de tabel User aan te maken.
 package com.example.demo.user;
 
 import javax.persistence.Entity;

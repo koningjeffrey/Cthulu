@@ -17,20 +17,28 @@ public class File {
     private Integer userId;
     private Integer fileValue;
     private String timestamp;
+    private String title;
     
     private File()  {}
     
-    public File(String filename, Integer userId, String timestamp)  {
+    public File(String filename, Integer userId, String title, String timestamp)  {
         this.filename = filename;
         this.userId = userId;
         this.timestamp = timestamp;
         this.fileValue = 0;
+        this.title = title;
     }
     public void setFileValue(Integer fileValue)  {
         this.fileValue = fileValue;
     }
     public Integer getFileValue()   {
         return fileValue;
+    }
+    public void setTile(String title)   {
+        this.title = title;
+    }
+    public String getTitle()    {
+        return title;
     }
     public void setFilename(String filename)    {
         this.filename = filename;

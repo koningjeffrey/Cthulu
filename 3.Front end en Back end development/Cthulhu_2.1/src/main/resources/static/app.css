@@ -2,7 +2,6 @@
 :root{
   --pink: #ff60ff;
   --white: #fff;
-  --black: #000000;
 }
 /*--------------------General styles--------------------*/
 html{
@@ -22,7 +21,9 @@ h1{
 h2{
   text-align: center;
 }
-
+error {
+  color: #ff0000;  
+}
 p {
   color: #fff;
 }
@@ -42,11 +43,6 @@ p {
 .Nav img{
   height: 60px;
 }
-
-/*--------------------Preset selecter--------------------*/
-
-
-
 /*--------------------Menu--------------------*/
 
 .menu{
@@ -72,7 +68,6 @@ p {
   right: 5px;
   bottom: 5px;
 }
-
 /*--------------------Box--------------------*/
 .box {
   position: absolute;
@@ -234,6 +229,31 @@ h2 {
   opacity: 0;
 }
 
+
+@media only screen and (max-width: 1200px) {
+  .Nav img{
+      height: 60px;
+  }
+  /*position column for mobile*/
+  .grid {
+      grid-template-columns: repeat(1, 1fr);
+      width: 100%;
+      top: 100px;
+      left: 0;
+      transform: translate(0,0);
+  }
+  /*size of the box*/
+  .griditem{
+      width: 90%;
+      margin-left: 50%;
+      margin-bottom: 20px;
+      transform: translate(-50%);
+  }
+  .drop-box{
+      display: none;
+  }
+}
+
 /*-----------------Upload------------*/
 
 .griditem .inputBox{
@@ -351,6 +371,14 @@ h2 {
     border-radius: 10px;
     margin-bottom: 5px;
   }
+  .producerName{
+    color: #ff60ff;
+    float: right;
+  }
+  .promoName{
+    color: #999;
+    float: right;
+  }
 
   /*--------------------Rating-----------------*/
 
@@ -388,7 +416,6 @@ h2 {
   background-color: rgba(0,0,0,0.8);
   z-index: 8;
 }
-
 .Notification{
   width: 400px;
   width: 600px;
@@ -406,7 +433,6 @@ h2 {
   display: flex;
   justify-content: center;
 }
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -419,28 +445,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-@media only screen and (max-width: 1200px) {
-  .Nav img{
-      height: 60px;
-  }
-  /*position column for mobile*/
-  .grid {
-      grid-template-columns: repeat(1, 1fr);
-      width: 100%;
-      top: 100px;
-      left: 0;
-      transform: translate(0,0);
-  }
-  /*size of the box*/
-  .griditem{
-      width: 90%;
-      margin-left: 50%;
-      margin-bottom: 20px;
-      transform: translate(-50%);
-  }
-  .drop-box{
-      display: none;
-  }
 }
