@@ -9,7 +9,7 @@ class Admin extends React.Component {
     render() {
         return (
             <div>
-            <Nav/>
+            <Nav {...this.props}/>
             <div className="grid">
                 <UserProducers/>
                 <UserPromoters/>

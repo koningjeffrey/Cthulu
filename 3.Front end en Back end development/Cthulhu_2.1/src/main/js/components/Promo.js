@@ -9,10 +9,11 @@ class Promo extends React.Component {
     
     constructor(props)  {
         super(props);
-        this.state = {  files: [], comments: [], currentFile: {}, currentUser:  {}, 
-                currentUserId: 0, currentFileId: 0};
+        this.state = {  uploads: [], comments: [], currentUser:  {}, 
+                        currentUserId: 0, currentFileId: 0};
         this.loadUser = this.loadUser.bind(this);
-        this.getFiles = this.getFiles.bind(this);
+        this.setCurrentFileId = this.setCurrentFileId.bind(this);
+        this.getUploads = this.getUploads.bind(this);
     }
     componentDidMount() {
             this.loadUser();
@@ -20,24 +21,31 @@ class Promo extends React.Component {
     
     loadUser()  {
         this.setState({currentUser: this.props.currentUser, currentUserId: this.props.currentUser.userId});
-        this.getFiles();
+        this.getUploads();
     }
     
-    getFiles() {
-	  axios.get(`/api/files/all`)
+    setCurrentFileId(currentFileId)  {
+        this.setState({currentFileId: currentFileId});
+    }
+    
+    getUploads() {
+	  axios.get(`/api/uploads/all`)
             .then(res => {
-                const files = res.data;
-                this.setState({ files: files });
+                const uploads = res.data;
+                this.setState({uploads:uploads});
           });
     }
     
     render() {
         return (
             <div>
-                <Nav/>
+                <Nav {...this.props}/>
                 <div className="grid">
-                    <PlayerPromo files={this.state.files}/>
-                    <Comments id="item2"/>
+                    <PlayerPromo {...this.props}    uploads={this.state.uploads} 
+                                                    currentFileId={this.state.currentFileId} 
+                                                    setCurrentFileId={this.setCurrentFileId}/>
+                    <Comments {...this.props}       currentUser={this.state.currentUser} 
+                                                    currentFileId={this.state.currentFileId}/>
                 </div>
             </div>
             );

@@ -7,7 +7,7 @@ class Comments extends React.Component {
     
     constructor(props) {
     super(props);
-    this.state={value: "Whats up?", comments:[], currentUser: this.props.currentUser, currentFileId: this.props.currentFileId};
+    this.state={value: "Whats up?", comments:[] };
 
     this.handleChange=this.handleChange.bind(this);
     this.addComment=this.addComment.bind(this);
@@ -16,6 +16,11 @@ class Comments extends React.Component {
     //Laadt de lijst met comments gelijk.
     componentDidMount(){
       this.getComments();
+    }
+    componentDidUpdate(prevProps)  {
+         if (this.props.currentFileId !== prevProps.currentFileId)    {
+             this.getComments();
+         }
     }
 
     addComment(e)  {
@@ -30,7 +35,7 @@ class Comments extends React.Component {
                 this.getComments();
         });    
     }
-
+    
     getComments()   {
         axios.get('/api/comments/' + this.props.currentFileId)
             .then(response =>   {
@@ -47,8 +52,9 @@ class Comments extends React.Component {
       return  (      
             <div className="griditem">
                 <h2>3. Comments</h2>
+                {this.props.currentUser.userRole === 1 &&
                 <div className="custom-select">
-                <select style={{backgroundColor: 'Black', color: 'white', width: '100%'}} onChange={this.handleChange}>
+                    <p>No rating yet</p>}<select style={{backgroundColor: 'Black', color: 'white', width: '100%'}} onChange={this.handleChange}>
                   <option value="Whats up amigo?">Preset..:</option>
                   <option value="Woow, that sound great.">Great</option>
                   <option value="Not bad, keep trying.">Mwa</option>
@@ -57,6 +63,7 @@ class Comments extends React.Component {
                   <option value="Maybe this will help: https://www.youtube.com/watch?v=dQw4w9WgXcQ">Try this!</option>
                 </select>
                 </div>
+                }
                 <form onSubmit={this.addComment}>
                 <textarea value={this.state.value} onChange={this.handleChange}>
                   {this.state.value}
@@ -66,6 +73,7 @@ class Comments extends React.Component {
                 {this.state.comments.map(comment =>
                 <Comment 
                   currentUser={this.props.currentUser}
+                  currentFileId={this.props.currentFileId}
                   comment={comment}
                   key={comment.commentId}/>
                 )}  
