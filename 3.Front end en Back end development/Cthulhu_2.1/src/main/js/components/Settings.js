@@ -5,11 +5,12 @@ class Settings extends React.Component {
 
     constructor(props) {
         super(props);
-            this.state = { };
+            this.state = { button: false, message:"" };
 
     this.changeUser = this.changeUser.bind(this);
     this.loginUser = this.loginUser.bind(this);
     this.saveLocalStorage = this.saveLocalStorage.bind(this);
+    this.check = this.check.bind(this);
     
     this.sFirstName = React.createRef();
     this.sLastName = React.createRef();
@@ -56,32 +57,64 @@ class Settings extends React.Component {
                         } else {return null;}
             });            
     }
+    
+    check(e)    {
+        let reFirstName = /^[a-zA-Z][a-zA-Z .,'-]*$/;
+        let reLastName = /^[a-zA-Z][a-zA-Z .,'-]*$/;
+        let rePassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/;
+        
+        if(e.target.name === "firstName") {
+            if(reFirstName.test(this.sFirstName.current.value) === false) {
+                this.setState({ button : false, message : "Enter a valid first name!" });;
+            }else {
+                this.setState({ message : "" });
+            }}
+        if(e.target.name === "lastName") {
+            if(reLastName.test(this.sLastName.current.value) === false) {
+                this.setState({ button : false, message : "Enter a valid last name!" });
+            }else {
+                this.setState({ message : "" });
+            }}
+        if(e.target.name === "password") {
+            if(rePassword.test(this.sPassword.current.value) === false) {
+                this.setState({ button : false, message : "Enter a valid password!\n\
+                (Password requires one lower case letter, one upper case letter, \n\
+                 one digit, 6-13 length, and no spaces)" });
+            }else {
+                this.setState({ message : "" });
+            }}
+        if(reFirstName.test(this.sFirstName.current.value) === true &&
+           reLastName.test(this.sLastName.current.value) === true &&
+           rePassword.test(this.sPassword.current.value) === true) {
+                this.setState({ button : true });
+        }
+    }
 
     render() {
-      return  <div className="box">
-      <h1>Change user settings</h1>
-      <form onSubmit={this.changeUser}>
-          <div className="inputBox">
-              <input type="text" ref={this.sFirstName}/>
-              <label>First name</label>
-          </div>
-          <div className="inputBox">
-              <input type="text" ref={this.sLastName}/>
-              <label>Last name</label>
-          </div>
-          <div className="inputBox">
-              <input type="text" ref={this.sCountry}/>
-              <label>Country</label>
-          </div>
-          <div className="inputBox">
-              <input    type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                        title="Must contain at least one number and one uppercase and lowercase letter, 
-                        and at least 8 or more characters (example:Passw0rd)"ref={this.sPassword}/>
-              <label>Password</label>
-          </div>
-          <input type="submit" name="Submit" value="Submit" />
-      </form>
-  </div>;
+      return  (
+            <div className="box">
+                <h1>Change user settings</h1>
+                <form onSubmit={this.changeUser}>
+                  <div className="inputBox">
+                      <input type="text" ref={this.sFirstName} name="firstName" onBlur={this.check}/>
+                      <label>First name</label>
+                  </div>
+                  <div className="inputBox">
+                      <input type="text" ref={this.sLastName} name="lastName" onBlur={this.check}/>
+                      <label>Last name</label>
+                  </div>
+                  <div className="inputBox">
+                      <input type="text" ref={this.sCountry}/>
+                      <label>Country</label>
+                  </div>
+                  <div className="inputBox">
+                      <input type="password" ref={this.sPassword} name="password" onBlur={this.check}/>
+                      <label>Password</label>
+                  </div>
+                  <input type="submit" name="Submit" value="Submit" disabled={!this.state.button}/>
+                </form>
+            </div>
+        );
     }
   }
 

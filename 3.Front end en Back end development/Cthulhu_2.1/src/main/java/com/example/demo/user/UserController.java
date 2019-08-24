@@ -1,9 +1,7 @@
 //userController wordt gebruikt om gegevens van en naar de database te sturen
 package com.example.demo.user;
 
-import com.example.demo.comment.Comment;
 import com.example.demo.comment.CommentRepository;
-import com.example.demo.file.File;
 import com.example.demo.file.FileRepository;
 import com.example.demo.file.UploadStorage;
 import com.example.demo.login.LoginAttempt;

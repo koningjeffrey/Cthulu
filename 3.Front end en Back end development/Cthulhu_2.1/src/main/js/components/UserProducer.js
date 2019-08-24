@@ -43,9 +43,9 @@ class UserProducer extends React.Component {
         return (
                 <div className="UserBlock">
                    <p>{this.props.producer.email}</p>
-                   <input class="UserButton" type="submit" name="Block" value="Block" onClick={this.blockProducer}/>
-                   <input class="UserButton" type="submit" name="Unblock" value="Unblock" onClick={this.unblockProducer}/>
-                   <input class="UserButton" type="submit" name="Remove" value="Remove" onClick={this.deleteProducer}/>
+                   <input className="UserButton" type="submit" name="Block" value="Block" onClick={this.blockProducer}/>
+                   <input className="UserButton" type="submit" name="Unblock" value="Unblock" onClick={this.unblockProducer}/>
+                   <input className="UserButton" type="submit" name="Remove" value="Remove" onClick={this.deleteProducer}/>
                 </div>
         );
     }

@@ -33596,11 +33596,65 @@ function (_React$Component) {
   }, {
     key: "check",
     value: function check(e) {
-      e.preventDefault();
-      var reEmail = /email/;
-      var reFirstName = /first/;
-      var reLastName = /last/;
-      var rePassword = /pass/;
+      var reEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+      var reFirstName = /^[a-zA-Z][a-zA-Z .,'-]*$/;
+      var reLastName = /^[a-zA-Z][a-zA-Z .,'-]*$/;
+      var rePassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/;
+
+      if (e.target.name === "email") {
+        if (reEmail.test(this.rEmail.current.value) === false) {
+          this.setState({
+            button: false,
+            message: "Enter a valid email adress!"
+          });
+        } else {
+          this.setState({
+            message: ""
+          });
+        }
+      }
+
+      if (e.target.name === "firstName") {
+        if (reFirstName.test(this.rFirstName.current.value) === false) {
+          this.setState({
+            button: false,
+            message: "Enter a valid first name!"
+          });
+          ;
+        } else {
+          this.setState({
+            message: ""
+          });
+        }
+      }
+
+      if (e.target.name === "lastName") {
+        if (reLastName.test(this.rLastName.current.value) === false) {
+          this.setState({
+            button: false,
+            message: "Enter a valid last name!"
+          });
+        } else {
+          this.setState({
+            message: ""
+          });
+        }
+      }
+
+      if (e.target.name === "password") {
+        if (rePassword.test(this.rPassword.current.value) === false) {
+          this.setState({
+            button: false,
+            message: "Enter a valid password!\n\
+                (Password expresion that requires one lower case letter, \n\
+                one upper case letter, one digit, 6-13 length, and no spaces)"
+          });
+        } else {
+          this.setState({
+            message: ""
+          });
+        }
+      }
 
       if (reEmail.test(this.rEmail.current.value) === true && reFirstName.test(this.rFirstName.current.value) === true && reLastName.test(this.rLastName.current.value) === true && rePassword.test(this.rPassword.current.value) === true) {
         this.setState({
@@ -33620,18 +33674,21 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         ref: this.rEmail,
+        name: "email",
         onBlur: this.check
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "E-mail")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "inputBox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         ref: this.rFirstName,
+        name: "firstName",
         onBlur: this.check
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "First name")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "inputBox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         ref: this.rLastName,
+        name: "lastName",
         onBlur: this.check
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Last name")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "inputBox"
@@ -33644,13 +33701,16 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         ref: this.rPassword,
+        name: "password",
         onBlur: this.check
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Password")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         name: "Submit",
         value: "Submit",
-        disabled: this.state.button
-      })));
+        disabled: !this.state.button
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "error"
+      }, this.state.message));
     }
   }]);
 
@@ -34209,19 +34269,19 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "UserBlock"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.producer.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        "class": "UserButton",
+        className: "UserButton",
         type: "submit",
         name: "Block",
         value: "Block",
         onClick: this.blockProducer
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        "class": "UserButton",
+        className: "UserButton",
         type: "submit",
         name: "Unblock",
         value: "Unblock",
         onClick: this.unblockProducer
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        "class": "UserButton",
+        className: "UserButton",
         type: "submit",
         name: "Remove",
         value: "Remove",
