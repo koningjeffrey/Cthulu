@@ -5,11 +5,12 @@ class Register extends React.Component {
 
     constructor(props) {
         super(props);
-            this.state = { };
+            this.state = { button: false};
 
     this.addUser = this.addUser.bind(this);
     this.loginUser = this.loginUser.bind(this);
     this.saveLocalStorage = this.saveLocalStorage.bind(this);
+    this.check = this.check.bind(this);
     
     this.rFirstName = React.createRef();
     this.rLastName = React.createRef();
@@ -56,41 +57,55 @@ class Register extends React.Component {
                         } else {return null;}
             });            
     }
+    
+    check(e)    {
+        e.preventDefault();
+        
+        let reEmail = /email/;
+        let reFirstName = /first/;
+        let reLastName = /last/;
+        let rePassword = /pass/;
+        
+        if(reEmail.test(this.rEmail.current.value) === true &&
+           reFirstName.test(this.rFirstName.current.value) === true &&
+           reLastName.test(this.rLastName.current.value) === true &&
+           rePassword.test(this.rPassword.current.value) === true) {
+       
+            this.setState({button: true});
+        } 
+    }
 
     render() {
-      return  <div className="box">
-      <h1>Register to become Hexalent</h1>
-      <h2>in search of exellent talent.</h2>
-      <form onSubmit={this.addUser}>
-      <div className="inputBox">
-              <input    type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
-                                    title="Must contain characters followed by an @ sign, 
-                                    followed by more characters, a . and more characters 
-                                    (example: name@domain.com)" ref={this.rEmail}/>
-              <label>E-mail</label>
-          </div>
-          <div className="inputBox">
-              <input type="text" ref={this.rFirstName}/>
-              <label>First name</label>
-          </div>
-          <div className="inputBox">
-              <input type="text" ref={this.rLastName}/>
-              <label>Last name</label>
-          </div>
-          <div className="inputBox">
-              <input type="text" ref={this.rCountry}/>
-              <label>Country</label>
-          </div>
-          <div className="inputBox">
-              <input    type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                        title="Must contain at least one number and one uppercase and lowercase letter, 
-                        and at least 8 or more characters (example:Passw0rd)" ref={this.rPassword}/>
-              <label>Password</label>
-          </div>
-          <input type="submit" name="Submit" value="Submit" />
-      </form>
-  </div>;
+      return ( 
+      <div className="box">
+        <h1>Register to become Hexalent</h1>
+        <h2>in search of exellent talent.</h2>
+        <form onSubmit={this.addUser}>
+            <div className="inputBox">
+                <input type="text" ref={this.rEmail} onBlur={this.check}/>
+                <label>E-mail</label>
+            </div>
+            <div className="inputBox">
+                <input type="text" ref={this.rFirstName} onBlur={this.check}/>
+                <label>First name</label>
+            </div>
+            <div className="inputBox">
+                <input type="text" ref={this.rLastName} onBlur={this.check}/>
+                <label>Last name</label>
+            </div>
+            <div className="inputBox">
+                <input type="text" ref={this.rCountry} onBlur={this.check}/>
+                <label>Country</label>
+            </div>
+            <div className="inputBox">
+                <input type="password" ref={this.rPassword} onBlur={this.check}/>
+                <label>Password</label>
+            </div>
+            <input type="submit" name="Submit" value="Submit" disabled={this.state.button}/>
+        </form>
+      </div>
+      );
     }
-  }
+}
 
 export default Register

@@ -2,6 +2,7 @@ package com.example.demo.file;
 
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
+import com.example.demo.util.Converter;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import com.example.demo.util.Converter;
 
 @RestController
 public class FileController {
@@ -79,12 +79,11 @@ public class FileController {
     public File createFile(     @RequestParam("userId")     Integer userId,
                                 @RequestParam("title")      String title,
                                 @RequestParam("file")       MultipartFile file) throws Exception {
-        
+
         Date timestamp = new Date();
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         
         Optional<User> fUser = userRepository.findById(userId);
-        
         User dUser = fUser.isPresent() ? fUser.get()  : null;
         
         uploadStorage.loadDirectory(dUser.getEmail());
@@ -92,7 +91,7 @@ public class FileController {
         Path absolutePath = uploadStorage.load(filename).toAbsolutePath();
         
         String newFileName = Converter.convertFile(absolutePath, uploadStorage.getUserLocation(), filename);
-
+        
         File f = new File(newFileName, userId, title, timestamp.toString());
         File createdFile = fileRepository.save(f);
         return createdFile;

@@ -5,9 +5,10 @@ class RegisterPromo extends React.Component {
     
     constructor(props) {
         super(props);
-            this.state = {};
+            this.state = {value:null};
 
     this.addUser = this.addUser.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     
     this.rFirstName = React.createRef();
     this.rLastName = React.createRef();
@@ -24,21 +25,25 @@ class RegisterPromo extends React.Component {
             data.append("lastName", this.rLastName.current.value);
             data.append("password", this.rPassword.current.value);
             data.append("country", this.rCountry.current.value);
+            data.append("userRole", this.state.value);
 
         axios.post(`/api/userPromo`, data)
             .then(result => {
                 const createdUser = result.data;
             console.log(createdUser);
         });    
-    } 
+    }
+    handleChange(e){
+      this.setState({value: e.target.value});
+    }
     
     render() {
       return  (
         <div className="griditem">
-          <h2>3. Add promo</h2>
+          <h2>3. Add Promoter or Producer</h2>
               <form onSubmit={this.addUser}>
                 <div className="inputBox">
-                    <input type="text" ref={this.rEmail}/>
+                    <input type="text" ref={this.rEmail} />
                     <label>E-mail</label>
                 </div>
                 <div className="inputBox">
@@ -56,6 +61,12 @@ class RegisterPromo extends React.Component {
                 <div className="inputBox">
                     <input type="password" ref={this.rPassword}/>
                     <label>Password</label>
+                </div>
+                <div className="inputBox">
+                    <select style={{backgroundColor: 'Black', color: 'white', width: '100%'}} onChange={this.handleChange}>
+                        <option value="Producer">Producer</option>
+                        <option value="Promoter">Promoter</option>
+                    </select>
                 </div>
                 <input type="submit" name="Submit" value="Submit"/>
               </form>

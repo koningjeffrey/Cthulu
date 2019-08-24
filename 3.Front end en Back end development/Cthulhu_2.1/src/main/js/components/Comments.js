@@ -28,6 +28,7 @@ class Comments extends React.Component {
       const data = new FormData();
           data.append("value", this.state.value);
           data.append('currentFileId', this.props.currentFileId);
+          data.append('currentUserId', this.props.currentUser.userId);
 
           axios.post(`/api/comment`, data)
             .then(result => {
@@ -54,7 +55,7 @@ class Comments extends React.Component {
                 <h2>3. Comments</h2>
                 {this.props.currentUser.userRole === 1 &&
                 <div className="custom-select">
-                    <p>No rating yet</p>}<select style={{backgroundColor: 'Black', color: 'white', width: '100%'}} onChange={this.handleChange}>
+                <select style={{backgroundColor: 'Black', color: 'white', width: '100%'}} onChange={this.handleChange}>
                   <option value="Whats up amigo?">Preset..:</option>
                   <option value="Woow, that sound great.">Great</option>
                   <option value="Not bad, keep trying.">Mwa</option>

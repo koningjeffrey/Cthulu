@@ -34,7 +34,7 @@ class Producer extends React.Component {
             .then(res => {
                 const uploads = res.data;
                 this.setState({uploads:uploads});
-    });
+        });
     }
     
     render() {

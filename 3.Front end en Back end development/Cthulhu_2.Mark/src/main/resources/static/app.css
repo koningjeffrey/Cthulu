@@ -36,7 +36,27 @@ p {
   color: #ff60ff;
   text-align: center;
 }
+/*-------------------scrollbar---------------*/
+::-webkit-scrollbar {
+  width: 12px; 
+  background: black;
+}
 
+::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 5px purple; 
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 5px #fff;
+  background: magenta;
+  border-radius: 12px;  
+}
+
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 0 0 5px magenta;
+  background: purple;  
+}
 /*--------------------Nav--------------------*/
 .Nav{
   right: auto;

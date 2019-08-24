@@ -15,21 +15,29 @@ public class Comment {
     
     private String commentField;
     private Integer fileId;
+    private Integer userId;
     
     private Comment()    {}
     
-    public Comment(String commentField, Integer fileId)    {
+    public Comment(String commentField, Integer fileId, Integer userId)    {
         this.commentField = commentField;
         this.fileId = fileId;
+        this.userId = userId;
     }
     public Integer getCommentId() {
         return commentId;
     }
-    public Integer getfileId()  {
+    public Integer getFileId()  {
         return fileId;
     }
     public void setFileId(Integer fileId)    {
         this.fileId = fileId;
+    }
+    public Integer getUserId()  {
+    return userId;
+    }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
     public String getCommentField()  {
         return commentField;

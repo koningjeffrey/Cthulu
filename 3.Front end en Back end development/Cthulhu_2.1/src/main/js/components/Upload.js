@@ -5,7 +5,7 @@ class Upload extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {  currentUser:  {}, uploadFile: {}, title: null, message: ""};
+        this.state = {  currentUser:  {}, uploadFile: null, title: "", message: ""};
         
         this.addFile = this.addFile.bind(this);
         this.setFileToUpload = this.setFileToUpload.bind(this);
@@ -20,19 +20,24 @@ class Upload extends React.Component {
     
     addFile(e)    {
         e.preventDefault();
-        console.log(this.state.title);
-        const data = new FormData();
-            data.append('file', this.state.uploadFile);
-            data.append('userId', this.props.currentUser.userId);
-            data.append('title', this.state.title);
+        
+        if(this.state.title !== "" && this.state.uploadFile !== null) {
+            const data = new FormData();
+                data.append('file', this.state.uploadFile);
+                data.append('userId', this.props.currentUser.userId);
+                data.append('title', this.state.title);
 
-        axios.post(`/api/createFile`, data)
-            .then(result => {
-                const createdFile = result.data;
-                this.setState({ message: "File Added!" });
-                this.props.addFile();
-        });
+            axios.post(`/api/createFile`, data)
+                .then(result => {
+                    const createdFile = result.data;
+                    this.setState({ message: "File Added!" });
+                    this.props.addFile();
+            });
+        } else {
+        this.setState({message:"Please enter a file and title!"});    
+        }
     }
+    
     setTitle()  {
         this.setState({title: this.title.current.value});
     }
@@ -49,7 +54,7 @@ class Upload extends React.Component {
                         </div>
                         <div className="ubtn">
                                 <button className="btn">Upload file</button>
-                                <input type="file" name="file" accept=".mp3,.ogg,.wav,.kut" onChange={this.setFileToUpload}/>
+                                <input type="file" name="file"accept=".mp3,.ogg,.wav,.kut" onChange={this.setFileToUpload}/>
                         </div>
                         <div className="inputBox">
                             <input type="text" name="title" ref={this.title} onChange={this.setTitle}/>

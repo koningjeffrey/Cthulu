@@ -1,6 +1,10 @@
 //userController wordt gebruikt om gegevens van en naar de database te sturen
 package com.example.demo.user;
 
+import com.example.demo.comment.Comment;
+import com.example.demo.comment.CommentRepository;
+import com.example.demo.file.File;
+import com.example.demo.file.FileRepository;
 import com.example.demo.file.UploadStorage;
 import com.example.demo.login.LoginAttempt;
 import com.example.demo.login.LoginAttemptRepository;
@@ -9,6 +13,7 @@ import java.util.List;
 
 import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,12 +27,21 @@ public class UserController {
     private UserRepository userRepository;
     private LoginAttemptRepository loginAttemptRepository;
     private UploadStorage uploadStorage;
+    private FileRepository fileRepository;
+    private CommentRepository commentRepository;
     
     //Constructor
-    public UserController(UserRepository userRepository, LoginAttemptRepository loginAttemptRepository, UploadStorage uploadStorage)    {
+    public UserController(  UserRepository userRepository, 
+                            LoginAttemptRepository loginAttemptRepository, 
+                            UploadStorage uploadStorage, 
+                            FileRepository fileRepository,
+                            CommentRepository commentRepository)    {
+        
         this.userRepository = userRepository;
         this.loginAttemptRepository = loginAttemptRepository;
         this.uploadStorage = uploadStorage;
+        this.fileRepository = fileRepository;
+        this.commentRepository = commentRepository;
     }
     
     @PostMapping("/api/login")
@@ -75,20 +89,22 @@ public class UserController {
             return null;
         }
     }
-        @PostMapping("/api/userPromo")
+    @PostMapping("/api/userPromo")
     public User createPromo( @RequestParam("email")      String email,
                              @RequestParam("firstName")  String firstName,
                              @RequestParam("lastName")   String lastName,
                              @RequestParam("password")   String password,
-                             @RequestParam("country")    String country)  {
+                             @RequestParam("country")    String country,
+                             @RequestParam("userRole")   Integer userRole)  {
         
         if( email.contains("@") && email.contains(".") 
         && !firstName.contains(">") && !firstName.contains(".") 
         && !lastName.contains(">") && firstName != null 
-        && lastName != null && country != null && password != null){
+        && lastName != null && country != null && password != null
+        && userRole != null){
             
         User promoUser = new User(email, firstName, lastName, password, country);
-        promoUser.setUserRole(1);
+        promoUser.setUserRole(userRole);
         User createdPromoUser = userRepository.save(promoUser);
         return createdPromoUser;
         }else{
@@ -137,6 +153,14 @@ public class UserController {
         
         List<User> promoters = userRepository.findByUserRole(1);
         return promoters;
+    }
+    @GetMapping("/api/getUser/{userId}")
+    public User getUserUserId(@PathVariable("userId") Integer userId)   {
+        
+        Optional<User> u = userRepository.findById(userId);
+        User loadUser = u.isPresent() ? u.get() : null;
+        
+        return loadUser;
     }
     
     //Deze stuurd een opdracht om te verijderen op basis van een userId

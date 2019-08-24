@@ -26,9 +26,10 @@ public class CommentController {
     
     @PostMapping("/api/comment")
     public Comment createComment(   @RequestParam("value")          String commentField, 
-                                    @RequestParam("currentFileId")  Integer fileId) {
+                                    @RequestParam("currentFileId")  Integer fileId,
+                                    @RequestParam("currentUserId")  Integer userId) {
         
-        Comment c = new Comment(commentField, fileId);
+        Comment c = new Comment(commentField, fileId, userId);
         Comment createdComment = commentRepository.save(c);
         return createdComment;
     }

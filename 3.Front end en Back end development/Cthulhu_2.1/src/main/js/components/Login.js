@@ -23,14 +23,17 @@ class Login extends React.Component {
         componentDidMount() {
             this.loadLocalStorage();
         }
+        
         saveLocalStorage() {
             localStorage.setItem('email', this.lEmail.current.value);
             localStorage.setItem('password', this.lPassword.current.value);
         }
+        
         loadLocalStorage() {
             this.lEmail.current.value = localStorage.getItem('email');
             this.lPassword.current.value = localStorage.getItem('password');
         }
+        
         loginUser(e)   {
             e.preventDefault();
             const data = new FormData();
