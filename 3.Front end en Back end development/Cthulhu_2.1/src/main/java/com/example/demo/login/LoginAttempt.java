@@ -1,3 +1,4 @@
+//Deze klasse maakt een tabel aan voor het aantal inlog pogingen.
 package com.example.demo.login;
 
 import javax.persistence.Entity;
@@ -15,8 +16,10 @@ public class LoginAttempt {
     private String email;
     private Long timestamp;
     
+    //Constructor
     private LoginAttempt()  {}
     
+    //Constructor
     public LoginAttempt(String email, Long timestamp)   {
         this.email = email;
         this.timestamp = timestamp;

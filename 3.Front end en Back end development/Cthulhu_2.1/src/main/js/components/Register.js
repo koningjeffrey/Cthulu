@@ -1,3 +1,4 @@
+//Registratiepagina om users aan te maken.
 import React from 'react';
 import axios from 'axios';
 

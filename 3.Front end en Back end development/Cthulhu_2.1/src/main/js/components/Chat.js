@@ -1,3 +1,4 @@
+//Pagina voor de chat tussen promo en admin
 import React from 'react';
 
 import Nav from './Nav'

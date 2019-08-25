@@ -1,3 +1,4 @@
+//Lijst van userPromoter voor de admin.
 import React from 'react';
 import axios from 'axios';
 

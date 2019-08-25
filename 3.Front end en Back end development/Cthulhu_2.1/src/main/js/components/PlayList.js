@@ -1,6 +1,7 @@
 import React from 'react';
 import Player from './Player'
 
+//Lijst met alle geuploade files die afgespeeld kunnen worden.
 class PlayList extends React.Component {
 
     constructor(props) {

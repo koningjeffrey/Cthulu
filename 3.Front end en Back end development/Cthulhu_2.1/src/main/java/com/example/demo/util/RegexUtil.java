@@ -1,3 +1,4 @@
+//Deze klasse is de beveiliging van de inputvelden.
 package com.example.demo.util;
 
 //import om patterns te compilen in regex

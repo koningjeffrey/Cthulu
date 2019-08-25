@@ -1,3 +1,4 @@
+//Pagina met lijst van notificaties.
 import React from 'react';
 
 import Nav from './Nav'

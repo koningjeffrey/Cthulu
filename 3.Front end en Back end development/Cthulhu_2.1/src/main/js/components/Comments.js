@@ -1,3 +1,4 @@
+//Waar je comments kan plaatsen en en alle geplaatste comments kan zien,
 import React from 'react';
 import axios from 'axios';
 

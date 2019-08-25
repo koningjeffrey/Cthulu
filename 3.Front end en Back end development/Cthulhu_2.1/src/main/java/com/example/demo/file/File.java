@@ -1,3 +1,5 @@
+//Dit zijn alle attributen die nodig zijn voor Files en die kunnen dan in de database worden geplaatst.
+//!!--- Doet hetzelfde als bij comment, zie comment.java voor uitleg ---!!!
 package com.example.demo.file;
 
 import javax.persistence.Entity;

@@ -1,3 +1,4 @@
+//Om de chat onderaan te plaatsen.
 import React from 'react';
 import { Link } from 'react-browser-router';
 

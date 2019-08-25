@@ -1,3 +1,5 @@
+//Dit zijn alle attributen die nodig zijn voor comments en die in de database worden geplaatst.
+//Zie comment.java
 package com.example.demo.file;
 
 public class Upload {

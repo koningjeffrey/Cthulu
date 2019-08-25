@@ -1,3 +1,4 @@
+//Gedeelte om bestanden te uploaden en titel mee te geven.
 import React from 'react';
 import axios from 'axios';
 

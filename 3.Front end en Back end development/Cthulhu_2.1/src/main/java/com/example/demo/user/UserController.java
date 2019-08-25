@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+    //Objecten
     private UserRepository userRepository;
     private LoginAttemptRepository loginAttemptRepository;
     private UploadStorage uploadStorage;
@@ -41,23 +42,30 @@ public class UserController {
         this.fileRepository = fileRepository;
         this.commentRepository = commentRepository;
     }
-    
+
+    //RequestParm haalt de gegevens op van de frontend en maakt hier een string van om in java te gebruiken. Deze post(plaatst) hij in de map api/userPromo.
+    //Ontvangt de inlog gegevens en loopt ze na in de database
     @PostMapping("/api/login")
     public User loginUser(  @RequestParam("email")      String email,
                             @RequestParam("password")   String password)   {
-
+        
+        //Eerst zoekt hij de email in de database.
         Optional<User> oUser = userRepository.findByEmail(email);
         
+        //Als de email in de database voorkomt, gaat hij koken of het password ook klopt.
         if ( oUser.isPresent() )   {
                 Optional<User> p = userRepository.findByEmailAndPassword(email, password);
-            
+
+                //Als ze kloppen, haalt hij de gegevens op.
                 if(p.isPresent() )  {
                     return p.get();
+                //Anders telt hij bij de email een inlog poging op tot 10 keer.
                 } else {
                     if(loginAttemptRepository.countByEmail(email) < 10 )    {
                         LoginAttempt loginAttempt = new LoginAttempt(email,(System.currentTimeMillis()/1000));
                         loginAttemptRepository.save(loginAttempt);
                         return null;
+                    //Na 10 pogingen wordt je account geblokkeerd.
                     } else  {
                         oUser.get().setUseable(false);
                         userRepository.save(oUser.get());
@@ -73,20 +81,28 @@ public class UserController {
                             @RequestParam("password")   String password,
                             @RequestParam("country")    String country) throws IOException  {
         
+        //Regex beveiliging. de email moet een @ en . bevatten bijvoorbeeld en inputvelden mogen niet leeg zijn.
         if( email.contains("@") && email.contains(".") 
         && !firstName.contains(">") && !firstName.contains(".") 
         && !lastName.contains(">") && firstName != null 
         && lastName != null && country != null && password != null){
-            
+        
+        //User wordt aangemaakt.
         User u = new User(email, firstName, lastName, password, country);
+        //User wordt opgeslagen in de database
         User createdUser= userRepository.save(u);
+        //Een folder wordt aangemaakt voor de user waar bestanden worden opgeslagen.
         uploadStorage.createDirectory(createdUser.getEmail());
         
         return createdUser;
+
+        //Als er niet aan de regex voorwaarden wordt gehouden, doet hij niks(null)
         }else{
             return null;
         }
     }
+
+    //Zelfde als bij de user, maar dan voor de promo zonder folder.
     @PostMapping("/api/userPromo")
     public User createPromo( @RequestParam("email")      String email,
                              @RequestParam("firstName")  String firstName,
@@ -110,7 +126,7 @@ public class UserController {
         }
     }
     
-    //RequestParm haalt de gegevens op van de frontend en maakt hier een string van om in java te gebruiken. Deze post(plaatst) hij in de map api/userPromo.
+    //Voor het aanpassen voor de user.
     @PostMapping("/api/changeUser")
     public User changeUser( @RequestParam("userId")     Integer userId,
                             @RequestParam("firstName")  String firstName,
@@ -152,6 +168,8 @@ public class UserController {
         List<User> promoters = userRepository.findByUserRole(1);
         return promoters;
     }
+
+    //Deze haalt de user op op basis van userId
     @GetMapping("/api/getUser/{userId}")
     public User getUserUserId(@PathVariable("userId") Integer userId)   {
         

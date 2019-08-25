@@ -1,3 +1,4 @@
+//Pagina om user account aan te passen.
 import React from 'react';
 import axios from 'axios';
 
