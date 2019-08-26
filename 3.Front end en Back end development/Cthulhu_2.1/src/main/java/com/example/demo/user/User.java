@@ -1,6 +1,8 @@
-//Deze klasse maakt een tabel aan voor gebruikers(user).
+//Deze klasse maakt een tabel aan voor gebruikers(user)
 package com.example.demo.user;
 
+import com.example.demo.util.PWHashing;
+import java.security.NoSuchAlgorithmException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 @Table(name="user")
 public class User {
     
-    //Attributen
+	//Attributen
     @Id @GeneratedValue(strategy = GenerationType.AUTO) 
     private Integer userId;
     
@@ -23,21 +25,21 @@ public class User {
     private Boolean useable;
     private String country;
     
-    //Constructor
+	//Constructor
     private User()   {}
-
-    //Constructor
-    public User(String email,String firstName,String lastName,String password, String country)  {
+	
+	//Constructor
+    public User(String email,String firstName,String lastName,String password, String country) throws NoSuchAlgorithmException  {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.password = PWHashing.generateHash(password);
         this.country = country;
         this.userRole = 0;
         this.useable = true;
     }
     
-    //Getters en setters
+	//Getters en setters
     public Integer getUserId()  {
         return userId;
     }
@@ -80,7 +82,7 @@ public class User {
     public String getPassword()   {
         return password;
     }
-    public void setPassword(String password)   {
-        this.password = password;
+    public void setPassword(String password) throws NoSuchAlgorithmException   {
+        this.password = PWHashing.generateHash(password);
     }
 }

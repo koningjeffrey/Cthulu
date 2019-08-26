@@ -27,7 +27,8 @@ class Upload extends React.Component {
                 data.append('file', this.state.uploadFile);
                 data.append('userId', this.props.currentUser.userId);
                 data.append('title', this.state.title);
-
+			this.setState({message: "uploading..."});
+			
             axios.post(`/api/createFile`, data)
                 .then(result => {
                     const createdFile = result.data;

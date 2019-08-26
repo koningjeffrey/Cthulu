@@ -49,12 +49,15 @@ public class UserController {
     public User loginUser(  @RequestParam("email")      String email,
                             @RequestParam("password")   String password)   {
         
-        //Eerst zoekt hij de email in de database.
+		//Eerst hashen we het ingevoerde wachtwoord
+		String hashedPassword = PWHashing.generateHash(password);
+		
+        //Dan zoekt hij de email in de database.
         Optional<User> oUser = userRepository.findByEmail(email);
         
         //Als de email in de database voorkomt, gaat hij koken of het password ook klopt.
         if ( oUser.isPresent() )   {
-                Optional<User> p = userRepository.findByEmailAndPassword(email, password);
+                Optional<User> p = userRepository.findByEmailAndPassword(email, hashedPassword);
 
                 //Als ze kloppen, haalt hij de gegevens op.
                 if(p.isPresent() )  {
