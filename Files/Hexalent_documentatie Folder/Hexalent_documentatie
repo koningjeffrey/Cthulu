@@ -2,7 +2,7 @@ ADOBE INDESIGN PRINTING INSTRUCTIONS FOR SERVICE PROVIDER REPORT
 
 PUBLICATION NAME: Hexalent_documentatie.indd
 
-PACKAGE DATE: 26-8-2019 01:05
+PACKAGE DATE: 26-8-2019 18:20
 Creation Date: 26-8-2019
 Modification Date: 26-8-2019
 
@@ -28,23 +28,22 @@ SPECIAL INSTRUCTIONS AND OTHER NOTES
 
 
 External Plug-ins 0
-Non Opaque Objects :On Page1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+Non Opaque Objects :On Page1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
 
 FONTS
-8 Fonts Used; 0 Missing, 0 Embedded, 5 Incomplete, 0 Protected
+7 Fonts Used; 0 Missing, 0 Embedded, 4 Incomplete, 0 Protected
 
 Fonts Packaged
 - Name: BlackadderITC-Regular; Type: OpenType TrueType, Status: OK
 - Name: BodoniMT; Type: OpenType TrueType, Status: OK
 - Name: HelveticaNeueLTStd-BdCn; Type: OpenType Type 1, Status: Incomplete
 - Name: HelveticaNeueLTStd-BlkCnO; Type: OpenType Type 1, Status: Incomplete
-- Name: HelveticaNeueLTStd-Cn; Type: OpenType Type 1, Status: Incomplete
 - Name: HelveticaNeueLTStd-HvCn; Type: OpenType Type 1, Status: Incomplete
 - Name: HelveticaNeueLTStd-LtCn; Type: OpenType Type 1, Status: Incomplete
 - Name: MinionPro-Regular; Type: OpenType Type 1, Status: OK
 
 
-COLORS AND INKS
+COLOURS AND INKS
 4 Process Inks; 0 Spot Inks
 
 - Name and Type: Process Cyan; Angle: 0,000; Lines/Inch: 0,000
@@ -55,8 +54,8 @@ COLORS AND INKS
 
 LINKS AND IMAGES
 (Missing & Embedded Links Only)
-Links and Images: 50 Links Found; 0 Modified, 2 Missing 0 Inaccessible
-Images: 0 Embedded, 49 use RGB color space
+Links and Images: 56 Links Found; 0 Modified, 2 Missing 0 Inaccessible
+Images: 0 Embedded, 55 use RGB colour space
 
 - Name: Hexalent_logo_white.png; Type: Portable Network Graphics (PNG) RGB; Status: Missing
 - Name: maxresdefault.jpg; Type: JPEG RGB; Status: Missing
@@ -75,9 +74,9 @@ Page Position: Upper Left
 Print Layers: Visible & Printable Layers
 Printer's Marks: None
 Bleed: 0p0, 0p0, 0p0, 0p0
-Color: Composite RGB
+Colour: Composite RGB
 Trapping Mode: None
-Send Image Data: Optimized Subsampling
+Send Image Data: Optimised Subsampling
 OPI/DCS Image Replacement: No
 Page Size: Custom: 102p0 x 51p0
 Paper Dimensions: 49p7,276 x 70p1,89

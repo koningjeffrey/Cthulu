@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: url(maxresdefault.jpg);
+    background-size: cover;
+    background-position: center center;
+    min-height: 100%;
+    background-repeat: no-repeat;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+}
+html {
+    height: 100%;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+}
+/*logo size*/
+header img{
+    height: 60px;
+}
+/*grid a style for three colomns*/
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    max-width: 1200px;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.griditem{
+    width: 400px;
+    height: 70vh;
+    padding: 10px;
+    background: rgba(0, 0, 0, .8);
+    box-sizing: border-box;
+    border: #ff60ff solid 2px;
+    box-shadow: 0 15px 25px rgba(0,0,0.5);
+    border-radius: 10px;
+}
+
+h2 {
+    color: #ff60ff;
+}
+
+/*input your file*/
+.drop-box{
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    border: 3px dashed gray;
+    margin-bottom: 5px;
+}
+
+/*drag file*/
+.drop-box.dragover{
+    color: #ff60ff;
+    border-color: #ff60ff;
+}
+
+/*input your tekst file*/
+.drop-box p{
+    color: grey;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 2rem;
+}
+
+/*sample player placement*/
+.player {
+    background-color: antiquewhite;
+    width: 100%;
+    height: 50px;
+}
+
+/*Sample comment placement*/
+.comments{
+    background-color: red;
+    width: 100%;
+    height: 50px;
+    }
+
+/*sample list*/
+iframe{
+    width: 100%;
+    height: 100px;
+}
+
+/*click buttom file upload*/
+.ubtn{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+/*button fileupload*/
+.btn{
+    width: 100%;
+    color: #fff;
+    background-color: #ff60ff;
+    border-color: #ff60ff;
+    padding: 8px 20px;
+    border-radius: 5px;
+}
+
+/*input buttom file (hidden)*/
+.ubtn input[type=file]{
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    header img{
+        height: 60px;
+    }
+    /*position column for mobile*/
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+        width: 100%;
+        top: 100px;
+        left: 0;
+        transform: translate(0,0);
+    }
+    /*size of the box*/
+    .griditem{
+        width: 90%;
+        margin-left: 50%;
+        margin-bottom: 20px;
+        transform: translate(-50%);
+    }
+    .drop-box{
+        display: none;
+    }
+  }
