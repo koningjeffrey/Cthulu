@@ -6,7 +6,9 @@ import com.example.demo.file.FileRepository;
 import com.example.demo.file.UploadStorage;
 import com.example.demo.login.LoginAttempt;
 import com.example.demo.login.LoginAttemptRepository;
+import com.example.demo.util.PWHashing;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import java.util.Optional;
@@ -47,7 +49,7 @@ public class UserController {
     //Ontvangt de inlog gegevens en loopt ze na in de database
     @PostMapping("/api/login")
     public User loginUser(  @RequestParam("email")      String email,
-                            @RequestParam("password")   String password)   {
+                            @RequestParam("password")   String password) throws NoSuchAlgorithmException   {
         
 		//Eerst hashen we het ingevoerde wachtwoord
 		String hashedPassword = PWHashing.generateHash(password);
@@ -82,7 +84,7 @@ public class UserController {
                             @RequestParam("firstName")  String firstName,
                             @RequestParam("lastName")   String lastName,
                             @RequestParam("password")   String password,
-                            @RequestParam("country")    String country) throws IOException  {
+                            @RequestParam("country")    String country) throws IOException, NoSuchAlgorithmException  {
         
         //Regex beveiliging. de email moet een @ en . bevatten bijvoorbeeld en inputvelden mogen niet leeg zijn.
         if( email.contains("@") && email.contains(".") 
@@ -112,7 +114,7 @@ public class UserController {
                              @RequestParam("lastName")   String lastName,
                              @RequestParam("password")   String password,
                              @RequestParam("country")    String country,
-                             @RequestParam("userRole")   Integer userRole)  {
+                             @RequestParam("userRole")   Integer userRole) throws NoSuchAlgorithmException  {
         
         if( email.contains("@") && email.contains(".") 
         && !firstName.contains(">") && !firstName.contains(".") 
@@ -135,7 +137,7 @@ public class UserController {
                             @RequestParam("firstName")  String firstName,
                             @RequestParam("lastName")   String lastName,
                             @RequestParam("password")   String password,
-                            @RequestParam("country")    String country) throws IOException  {
+                            @RequestParam("country")    String country) throws IOException, NoSuchAlgorithmException  {
         
         Optional<User> u = userRepository.findById(userId);
         User cUser = u.isPresent() ? u.get()  : null;
