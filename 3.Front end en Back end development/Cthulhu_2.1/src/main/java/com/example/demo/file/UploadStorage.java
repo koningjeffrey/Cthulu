@@ -89,11 +89,6 @@ public class UploadStorage {
         }
     }
 
-    //Voor het verwijderen van het bestand.
-    public void deleteAll() {
-        FileSystemUtils.deleteRecursively(rootLocation.toFile());
-    }
-
     public void init() throws IOException {
         try {
             Files.createDirectories(rootLocation);

@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class PWHashing {
     
+    private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
+    
     public static String generateHash(String password) throws NoSuchAlgorithmException {  
         
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -12,8 +14,6 @@ public class PWHashing {
     byte[] encodedhash = digest.digest(password.getBytes());
     return bytesToStringHex(encodedhash);
     }
-    
-    private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
     
     public static String bytesToStringHex(byte [] bytes) {
         char[] hexChars = new char[bytes.length * 2];
