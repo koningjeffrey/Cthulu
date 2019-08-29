@@ -1,4 +1,3 @@
-//
 package com.example.demo.file;
 
 import java.io.IOException;
@@ -20,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UploadStorage {
-    
+
     private final Path rootLocation;
     private Path userLocation;
 
@@ -51,7 +50,6 @@ public class UploadStorage {
         }
     }
 
-    //Voor het lezen van een bestand.
     public Resource loadAsResource(String filename) throws Exception {
         try {
             Path file = load(filename);
@@ -77,7 +75,6 @@ public class UploadStorage {
         return userLocation;
     }
     
-    //Dit leest alle bestanden op van een bepaalde user.
     public Stream<Path> loadAll() throws Exception {
         try {
             return Files.walk(this.rootLocation, 1)
@@ -89,6 +86,10 @@ public class UploadStorage {
         }
     }
 
+    public void deleteAll() {
+        FileSystemUtils.deleteRecursively(rootLocation.toFile());
+    }
+
     public void init() throws IOException {
         try {
             Files.createDirectories(rootLocation);
@@ -97,8 +98,6 @@ public class UploadStorage {
             throw new IOException("Could not initialize storage", e);
         }
     }
-
-    //Dit maakt een folder per user.
     public void createDirectory(String Email) throws IOException {
         Path userLocation = Paths.get("upload-dir/" + Email);
         try {
@@ -109,8 +108,6 @@ public class UploadStorage {
             throw new IOException("Could not initialize storage", e);
         }
     }
-    
-    //Dit laadt de folder per user op basis van email.
     public void loadDirectory(String Email) {
             Path userLocation = Paths.get("upload-dir/" + Email);
             this.userLocation = userLocation;

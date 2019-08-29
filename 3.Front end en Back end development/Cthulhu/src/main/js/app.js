@@ -1,4 +1,3 @@
-//Basis van de react pagina's met browserRouter die alle pagina's aan elkaar koppeld.
 import axios from 'axios';
 import React from 'react';
 import ReactDOM from'react-dom';
@@ -56,7 +55,4 @@ class App extends React.Component {
                 }
 }
 
-ReactDOM.render(
-	<App />,
-	document.getElementById('react')
-);
+export default App;

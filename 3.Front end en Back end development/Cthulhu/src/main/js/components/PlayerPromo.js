@@ -1,4 +1,3 @@
-//Lijst met alle geuploade files van alle users die afgespeeld kunnen worden.
 import React from 'react';
 import Player from './Player'
 

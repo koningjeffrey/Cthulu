@@ -1,4 +1,3 @@
-//Dit is de locatie waar de bestanden worden opgeslagen.
 package com.example.demo.file;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

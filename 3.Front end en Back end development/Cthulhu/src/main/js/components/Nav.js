@@ -1,4 +1,3 @@
-//Navigatiebalk met logo en menu.
 import React from 'react';
 import { Link } from 'react-browser-router';
 import { history } from 'react-router-dom';

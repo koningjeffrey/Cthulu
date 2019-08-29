@@ -4,17 +4,16 @@ package com.example.demo.user;
 import com.example.demo.comment.CommentRepository;
 import com.example.demo.file.FileRepository;
 import com.example.demo.file.UploadStorage;
-import com.example.demo.login.LoginAttempt;
-import com.example.demo.login.LoginAttemptRepository;
+import com.example.demo.loginattempt.LoginAttempt;
+import com.example.demo.loginattempt.LoginAttemptRepository;
 import com.example.demo.util.PWHashing;
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
 import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    //Objecten
     private UserRepository userRepository;
     private LoginAttemptRepository loginAttemptRepository;
     private UploadStorage uploadStorage;
@@ -44,38 +42,44 @@ public class UserController {
         this.fileRepository = fileRepository;
         this.commentRepository = commentRepository;
     }
-
-    //RequestParm haalt de gegevens op van de frontend en maakt hier een string van om in java te gebruiken. Deze post(plaatst) hij in de map api/userPromo.
-    //Ontvangt de inlog gegevens en loopt ze na in de database
+    
     @PostMapping("/api/login")
     public User loginUser(  @RequestParam("email")      String email,
                             @RequestParam("password")   String password) throws NoSuchAlgorithmException   {
+
+        String hashedPassword = PWHashing.generateHash(password);
         
-		//Eerst hashen we het ingevoerde wachtwoord
-		String hashedPassword = PWHashing.generateHash(password);
-		
-        //Dan zoekt hij de email in de database.
         Optional<User> oUser = userRepository.findByEmail(email);
         
-        //Als de email in de database voorkomt, gaat hij koken of het password ook klopt.
-        if ( oUser.isPresent() )   {
-                Optional<User> p = userRepository.findByEmailAndPassword(email, hashedPassword);
-
-                //Als ze kloppen, haalt hij de gegevens op.
-                if(p.isPresent() )  {
-                    return p.get();
-                //Anders telt hij bij de email een inlog poging op tot 10 keer.
-                } else {
-                    if(loginAttemptRepository.countByEmail(email) < 10 )    {
-                        LoginAttempt loginAttempt = new LoginAttempt(email,(System.currentTimeMillis()/1000));
-                        loginAttemptRepository.save(loginAttempt);
-                        return null;
-                    //Na 10 pogingen wordt je account geblokkeerd.
-                    } else  {
-                        oUser.get().setUseable(false);
-                        userRepository.save(oUser.get());
-                        return null;
-                    }}} else {return null;} 
+        /*zit het ingevoerde emailadres in het systeem?*/
+        if ( oUser.isPresent())   {
+                try {loginAttemptRepository.clearLoginAttempts();} 
+                catch (Exception e) {System.out.println("LoginAttempts already clear!" + e);}
+                
+                /*is het ingevoerde emailadres niet geblokkeerd?*/
+                if(oUser.get().getUseable() == true) {
+                    
+                    Optional<User> p = userRepository.findByEmailAndPassword(email, hashedPassword);
+                    
+                    if(p.isPresent())  {    
+                        return p.get();
+                        
+                    } else {
+                        
+                        if(loginAttemptRepository.countByEmail(email) < 10 )    {
+                            LoginAttempt loginAttempt = new LoginAttempt(email,(System.currentTimeMillis()/1000));
+                            loginAttemptRepository.save(loginAttempt);
+                            return null;
+                        } else {
+                            oUser.get().setUseable(false);
+                            userRepository.save(oUser.get());
+                            return null;
+                        }
+                    }
+                /*geblokkeerd*/
+                } else {return null;}
+        /*verkeerde email*/
+        } else{ return null;}
     }
     
     //Maakt een user aan en checkt of hij aan de Regex voorwaarden voldoet.
@@ -86,37 +90,34 @@ public class UserController {
                             @RequestParam("password")   String password,
                             @RequestParam("country")    String country) throws IOException, NoSuchAlgorithmException  {
         
-        //Regex beveiliging. de email moet een @ en . bevatten bijvoorbeeld en inputvelden mogen niet leeg zijn.
-        if( email.contains("@") && email.contains(".") 
+        Optional<User> u = userRepository.findByEmail(email);
+        if(u.isPresent()) { return null; } 
+        
+        else if( email.contains("@") && email.contains(".") 
         && !firstName.contains(">") && !firstName.contains(".") 
         && !lastName.contains(">") && firstName != null 
         && lastName != null && country != null && password != null){
-        
-        //User wordt aangemaakt.
-        User u = new User(email, firstName, lastName, password, country);
-        //User wordt opgeslagen in de database
-        User createdUser= userRepository.save(u);
-        //Een folder wordt aangemaakt voor de user waar bestanden worden opgeslagen.
+            
+        User user = new User(email, firstName, lastName, password, country);
+        User createdUser= userRepository.save(user);
         uploadStorage.createDirectory(createdUser.getEmail());
         
         return createdUser;
-
-        //Als er niet aan de regex voorwaarden wordt gehouden, doet hij niks(null)
-        }else{
-            return null;
-        }
+        }else{ return null;}
     }
-
-    //Zelfde als bij de user, maar dan voor de promo zonder folder.
+    
     @PostMapping("/api/userPromo")
     public User createPromo( @RequestParam("email")      String email,
                              @RequestParam("firstName")  String firstName,
                              @RequestParam("lastName")   String lastName,
                              @RequestParam("password")   String password,
                              @RequestParam("country")    String country,
-                             @RequestParam("userRole")   Integer userRole) throws NoSuchAlgorithmException  {
+                             @RequestParam("userRole")   Integer userRole) throws NoSuchAlgorithmException, IOException  {
         
-        if( email.contains("@") && email.contains(".") 
+        Optional<User> u = userRepository.findByEmail(email);
+        if(u.isPresent()) { return null; } 
+        
+        else if( email.contains("@") && email.contains(".") 
         && !firstName.contains(">") && !firstName.contains(".") 
         && !lastName.contains(">") && firstName != null 
         && lastName != null && country != null && password != null
@@ -125,13 +126,13 @@ public class UserController {
         User promoUser = new User(email, firstName, lastName, password, country);
         promoUser.setUserRole(userRole);
         User createdPromoUser = userRepository.save(promoUser);
+        uploadStorage.createDirectory(createdPromoUser.getEmail());
+        
         return createdPromoUser;
-        }else{
-            return null;
-        }
+        }else{ return null; }
     }
     
-    //Voor het aanpassen voor de user.
+    //RequestParm haalt de gegevens op van de frontend en maakt hier een string van om in java te gebruiken. Deze post(plaatst) hij in de map api/userPromo.
     @PostMapping("/api/changeUser")
     public User changeUser( @RequestParam("userId")     Integer userId,
                             @RequestParam("firstName")  String firstName,
@@ -173,8 +174,6 @@ public class UserController {
         List<User> promoters = userRepository.findByUserRole(1);
         return promoters;
     }
-
-    //Deze haalt de user op op basis van userId
     @GetMapping("/api/getUser/{userId}")
     public User getUserUserId(@PathVariable("userId") Integer userId)   {
         
@@ -190,7 +189,6 @@ public class UserController {
         
         //De userId die met RequestParm is doorgegeven uit de frontend wordt gezocht in de database met users.
         Optional<User> u = userRepository.findById(userId);
-        
         //Als deze user is gevonden haalt hij hem op en kan user worden verwijdert. Als de user er niet is returnt hij null en doet niks.
         User dUser = u.isPresent() ? u.get()  : null;
         userRepository.delete(dUser);

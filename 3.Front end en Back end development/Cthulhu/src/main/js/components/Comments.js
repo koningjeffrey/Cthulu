@@ -1,4 +1,3 @@
-//Waar je comments kan plaatsen en en alle geplaatste comments kan zien,
 import React from 'react';
 import axios from 'axios';
 
@@ -8,7 +7,7 @@ class Comments extends React.Component {
     
     constructor(props) {
     super(props);
-    this.state={value: "Whats up?", comments:[] };
+    this.state={value: "Whats up?", comments:[], message: "" };
 
     this.handleChange=this.handleChange.bind(this);
     this.addComment=this.addComment.bind(this);
@@ -26,6 +25,12 @@ class Comments extends React.Component {
 
     addComment(e)  {
       e.preventDefault();
+      
+      if(this.props.currentFileId !== 0 && 
+         this.state.value !== "Whats up?" && 
+         this.state.value !=="" &&
+         this.props.currentUser.userId !== 0) {
+        
       const data = new FormData();
           data.append("value", this.state.value);
           data.append('currentFileId', this.props.currentFileId);
@@ -35,7 +40,10 @@ class Comments extends React.Component {
             .then(result => {
                 const createComment = result.data;
                 this.getComments();
-        });    
+        });
+        } else {
+            this.setState({message: "Select a file first!"});
+        }
     }
     
     getComments()   {

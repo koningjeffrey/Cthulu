@@ -1,4 +1,3 @@
-//Per producer weergave op voor admin.
 import React from 'react';
 import axios from 'axios';
 

@@ -1,4 +1,3 @@
-//Deze klasse bevat de main method en is het begin van de applicatie.
 package com.example.demo;
 
 import com.example.demo.file.UploadStorage;
@@ -14,7 +13,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
         
-    @Bean
+        @Bean
     CommandLineRunner init(UploadStorage uploadStorage) {
         return (args) -> {
             uploadStorage.init();

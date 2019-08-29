@@ -1,4 +1,3 @@
-//Pagina van de producer met upload, playlist en comments.
 import React from 'react';
 import axios from 'axios';
 

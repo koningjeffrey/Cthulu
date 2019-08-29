@@ -1,4 +1,3 @@
-//Bericht dat in comments geplaatst is.
 import React from 'react'
 import axios from 'axios';
 

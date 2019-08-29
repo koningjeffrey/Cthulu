@@ -1,4 +1,3 @@
-//Deze klasse maakt een tabel aan voor gebruikers(user)
 package com.example.demo.user;
 
 import com.example.demo.util.PWHashing;
@@ -13,7 +12,6 @@ import javax.persistence.Table;
 @Table(name="user")
 public class User {
     
-	//Attributen
     @Id @GeneratedValue(strategy = GenerationType.AUTO) 
     private Integer userId;
     
@@ -25,10 +23,8 @@ public class User {
     private Boolean useable;
     private String country;
     
-	//Constructor
     private User()   {}
-	
-	//Constructor
+
     public User(String email,String firstName,String lastName,String password, String country) throws NoSuchAlgorithmException  {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,7 +35,6 @@ public class User {
         this.useable = true;
     }
     
-	//Getters en setters
     public Integer getUserId()  {
         return userId;
     }

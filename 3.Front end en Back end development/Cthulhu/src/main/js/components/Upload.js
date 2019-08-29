@@ -1,12 +1,13 @@
-//Gedeelte om bestanden te uploaden en titel mee te geven.
 import React from 'react';
 import axios from 'axios';
+import FileDrop from './FileDrop';
+import { loadProgressBar } from 'axios-progress-bar';
 
 class Upload extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {  currentUser:  {}, uploadFile: null, title: "", message: ""};
+        this.state = {  currentUser:  {}, uploadFile: null, title: "", message: "", disabled: false};
         
         this.addFile = this.addFile.bind(this);
         this.setFileToUpload = this.setFileToUpload.bind(this);
@@ -14,9 +15,12 @@ class Upload extends React.Component {
         
         this.title = React.createRef();
     }
-    setFileToUpload(e) {
-        console.log(e.target.files[0]);
-        this.setState({uploadFile: e.target.files[0]});
+    componentDidMount() {
+        loadProgressBar();
+    }
+    
+    setFileToUpload(files) {
+        this.setState({uploadFile: files});
     }
     
     addFile(e)    {
@@ -27,12 +31,18 @@ class Upload extends React.Component {
                 data.append('file', this.state.uploadFile);
                 data.append('userId', this.props.currentUser.userId);
                 data.append('title', this.state.title);
-			this.setState({message: "uploading..."});
-			
+            this.setState({message: "uploading...", disabled: true});
+            
             axios.post(`/api/createFile`, data)
                 .then(result => {
+                    console.log(result.data);
+                    console.log(result.status);
+                    console.log(result.statusText);
+                    console.log(result.headers);
+                    console.log(result.config);
+                    
                     const createdFile = result.data;
-                    this.setState({ message: "File Added!" });
+                    this.setState({ message: "File Added!", disabled: false});
                     this.props.addFile();
             });
         } else {
@@ -47,25 +57,22 @@ class Upload extends React.Component {
     render() {
         return (
                 <div>
-                    <form onSubmit={this.addFile}>
                     <div className="griditem">
                         <h2>1. Upload</h2>
-                        <div className="drop-box">
-                            <i className="fas fa-upload"></i>
-                            <p className="drop-text">Drop file here.</p>                    
-                        </div>
-                        <div className="ubtn">
-                                <button className="btn">Upload file</button>
-                                <input type="file" name="file" accept=".mp3,.ogg,.wav,.kut" onChange={this.setFileToUpload}/>
-                        </div>
-                        <div className="inputBox">
-                            <input type="text" name="title" ref={this.title} onChange={this.setTitle}/>
-                            <label>Title</label>
-                        </div>
+                        <form onSubmit={this.addFile}>
+                            <div className="card">
+                                <FileDrop {...this.props} disabled={this.state.disabled} uploadFile={this.state.uploadFile} onFilesAdded={this.setFileToUpload}>
+                                    Drop file here.                    
+                                </FileDrop>
+                            </div>
+                            <div className="inputBox">
+                                <input type="text" name="title" ref={this.title} onChange={this.setTitle}/>
+                                <label>Title</label>
+                            </div>
+                            <input type="submit" name="submit" value="Submit"/>
+                        </form>
                         <p>{this.state.message}</p>
-                        <input type="submit" name="submit" value="Submit"/>
                     </div>
-                    </form>
                 </div>
         );
     }

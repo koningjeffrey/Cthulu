@@ -1,4 +1,3 @@
-//Register op de adminpagina om users aan te maken.
 import React from 'react';
 import axios from 'axios';
 
@@ -6,7 +5,7 @@ class RegisterPromo extends React.Component {
     
     constructor(props) {
         super(props);
-            this.state = {value:null, button:false, message:""};
+            this.state = {value:null, button:false, message:"", succes:""};
 
     this.addUser = this.addUser.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -32,7 +31,7 @@ class RegisterPromo extends React.Component {
         axios.post(`/api/userPromo`, data)
             .then(result => {
                 const createdUser = result.data;
-            console.log(createdUser);
+                this.setState({succes: "User succesfully added!"});
         });    
     }
     handleChange(e){
@@ -106,13 +105,14 @@ class RegisterPromo extends React.Component {
                 </div>
                 <div className="inputBox">
                     <select style={{backgroundColor: 'Black', color: 'white', width: '100%'}} onChange={this.handleChange}>
-                        <option value="Producer">Producer</option>
-                        <option value="Promoter">Promoter</option>
+                        <option value="0">Producer</option>
+                        <option value="1" >Promoter</option>
                     </select>
                 </div>
                 <input type="submit" name="Submit" value="Submit" disabled={!this.state.button}/>
               </form>
               <p className="error">{this.state.message}</p>
+              <p>{this.state.succes}</p>
         </div>
       );
     }
